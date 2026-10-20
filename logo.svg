@@ -1,141 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" width="700" height="200">
   <defs>
-    <!-- Gradiente de Fundo Azul Marinho Luxo -->
-    <radialGradient id="bgGrad" cx="50%" cy="40%" r="65%">
-      <stop offset="0%" stop-color="#0f1d33" />
-      <stop offset="60%" stop-color="#080e1a" />
-      <stop offset="100%" stop-color="#04070e" />
-    </radialGradient>
-
-    <!-- Brilho Dourado Sutil -->
-    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="50%" stop-color="#d97706" />
-      <stop offset="100%" stop-color="#92400e" />
+    <!-- Gradiente Dourado Sutil Premium -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
     </linearGradient>
 
-    <!-- Sombra Suave -->
-    <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#000000" flood-opacity="0.6" />
+    <!-- Brilho Suave para as Letras -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#000000" flood-opacity="0.8" />
     </filter>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&amp;family=Plus+Jakarta+Sans:wght@700;800;900&amp;display=swap');
+      
+      .text-ad-title {
+        font-family: 'Montserrat', 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-weight: 900;
+        text-anchor: middle;
+        text-transform: uppercase;
+      }
+      
+      .text-ad-sub {
+        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-weight: 700;
+        text-anchor: middle;
+        text-transform: uppercase;
+        letter-spacing: 7px;
+        fill: #94a3b8;
+      }
+    </style>
   </defs>
 
-  <!-- Fundo Sólido Azul Marinho Escuro -->
-  <rect width="600" height="800" fill="url(#bgGrad)" rx="32" />
-
-  <!-- Borda Delicada de Acabamento Luxo -->
-  <rect x="12" y="12" width="576" height="776" rx="24" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
-
-  <!-- TEXTO SUPERIOR: Culto -->
-  <g filter="url(#glowFilter)">
-    <text x="300" y="270" 
-          font-family="'Playfair Display', 'Didot', 'Bodoni MT', 'Cinzel', Georgia, serif" 
-          font-size="130" 
-          font-weight="400" 
-          font-style="normal" 
-          fill="#ffffff" 
-          text-anchor="middle" 
-          letter-spacing="2">
-      Culto
-    </text>
-  </g>
-
-  <!-- GRUPO DAS SILHUETAS DOS EMPREENDEDORES (Branco Puro) -->
-  <g fill="#ffffff" filter="url(#glowFilter)">
+  <!-- Grupo Principal com Sombra Suave -->
+  <g filter="url(#softGlow)">
     
-    <!-- 1. Silhueta Esquerda: Mulher de Perfil (Coque Clássico) -->
-    <path d="M 230 460 
-             C 215 450, 195 442, 175 442 
-             C 160 442, 150 450, 142 462 
-             C 135 472, 138 488, 144 498 
-             C 140 496, 134 494, 128 496 
-             C 122 498, 120 504, 122 510 
-             C 124 515, 130 518, 136 518 
-             C 134 522, 132 528, 133 534 
-             C 135 542, 142 546, 148 548 
-             C 144 554, 144 562, 147 568 
-             C 152 576, 160 578, 168 578 
-             L 165 595 
-             C 155 615, 145 640, 135 675 
-             L 185 675 
-             C 195 640, 205 605, 215 570 
-             Z" />
+    <!-- Linha Superior: Ícone Sutil / Estrela Espiritual -->
+    <text x="350" y="48" font-size="20" fill="url(#goldGrad)" text-anchor="middle">✦ ✦ ✦</text>
 
-    <!-- 2. Silhueta Direita: Mulher de Perfil (Cabelo Ondulado) -->
-    <path d="M 370 460 
-             C 385 450, 405 442, 425 442 
-             C 440 442, 450 450, 458 462 
-             C 465 472, 462 488, 456 498 
-             C 460 496, 466 494, 472 496 
-             C 478 498, 480 504, 478 510 
-             C 476 515, 470 518, 464 518 
-             C 466 522, 468 528, 467 534 
-             C 465 542, 458 546, 452 548 
-             C 456 554, 456 562, 453 568 
-             C 448 576, 440 578, 432 578 
-             C 438 595, 448 618, 456 645 
-             C 459 655, 462 665, 465 675 
-             L 415 675 
-             C 405 640, 395 605, 385 570 
-             Z" />
-
-    <!-- 3. Silhueta Central: Homem Empreendedor de Terno e Gravata -->
-    <!-- Cabeça e Cabelo -->
-    <path d="M 300 428 
-             C 278 428, 260 446, 260 472 
-             C 260 488, 268 502, 276 512 
-             C 282 520, 288 528, 288 540 
-             L 312 540 
-             C 312 528, 318 520, 324 512 
-             C 332 502, 340 488, 340 472 
-             C 340 446, 322 428, 300 428 Z" />
-
-    <!-- Orelhas e detalhes de cabelo -->
-    <circle cx="260" cy="480" r="8" />
-    <circle cx="340" cy="480" r="8" />
-
-    <!-- Terno / Ombro e Peitoral -->
-    <path d="M 230 580 
-             C 200 595, 175 625, 170 675 
-             L 430 675 
-             C 425 625, 400 595, 370 580 
-             L 345 615 
-             L 330 575 
-             L 300 590 
-             L 270 575 
-             L 255 615 
-             Z" />
-
-    <!-- Recortes em Azul Marinho no Terno: Camisa, Colarinho e Gravata -->
-    <g fill="#080e1a">
-      <!-- V da Camisa -->
-      <polygon points="300,590 270,575 285,675 315,675 330,575" />
-    </g>
-
-    <!-- Camisa e Gravata (Contraste) -->
-    <!-- Colarinho Branco -->
-    <polygon points="280,578 300,605 288,612" fill="#ffffff" />
-    <polygon points="320,578 300,605 312,612" fill="#ffffff" />
-
-    <!-- Gravata Estilizada em Azul Marinho Escuro -->
-    <g fill="#080e1a">
-      <!-- Nó da Gravata -->
-      <polygon points="296,606 304,606 306,616 294,616" />
-      <!-- Corpo da Gravata -->
-      <polygon points="295,618 305,618 309,675 291,675" />
-    </g>
-  </g>
-
-  <!-- TEXTO INFERIOR: EMPREENDEDOR -->
-  <g filter="url(#glowFilter)">
-    <text x="300" y="740" 
-          font-family="'Plus Jakarta Sans', 'Montserrat', 'Inter', Arial, sans-serif" 
-          font-size="34" 
-          font-weight="900" 
-          fill="#ffffff" 
-          text-anchor="middle" 
-          letter-spacing="9">
-      EMPREENDEDOR
+    <!-- Escrita Principal Moderna: ASSEMBLÉIA DE DEUS -->
+    <text x="350" y="118" class="text-ad-title">
+      <!-- Palavra ASSEMBLÉIA em Branco Puro Alto Impacto -->
+      <tspan fill="#ffffff" font-size="52" letter-spacing="4px">ASSEMBLÉIA </tspan>
+      <!-- Expressão DE DEUS em Dourado Moderno / Alta Nobreza -->
+      <tspan fill="url(#goldGrad)" font-size="52" letter-spacing="5px">DE DEUS</tspan>
     </text>
+
+    <!-- Linha Decorativa Minimalista -->
+    <line x1="220" y1="138" x2="480" y2="138" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+
+    <!-- Subtítulo Moderno: União da Vitória - PR -->
+    <text x="350" y="165" font-size="13" class="text-ad-sub">
+      União da Vitória • PR
+    </text>
+
   </g>
 </svg>

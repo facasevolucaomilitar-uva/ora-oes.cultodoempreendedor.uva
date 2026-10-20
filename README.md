@@ -1,15 +1,16 @@
-# 👑 Culto do Empreendedor • União da Vitória - PR
-## Mural de Oração & Painel do Intercessor
+# 💼 Culto do Empreendedor • União da Vitória - PR
+## Mural de Oração & Painel do Intercessor (Assembleia de Deus • Templo Sede)
 
-Aplicativo desenvolvido para o **Culto do Empreendedor de União da Vitória - PR**, estruturado nas duas etapas:
-1. **Formulário Público (index.html)**: O link personalizado com a logo oficial do evento para enviar aos irmãos e empreendedores, onde preenchem apenas os 3 campos e **não têm acesso** aos pedidos das outras pessoas.
-2. **Painel do Administrador (admin.html)**: O mural protegido por PIN onde **somente você (pastor/líder/intercessor)** vê todos os pedidos recebidos, com filtros por **Dia (Hoje)**, **Semana** e **Mês**.
+Aplicativo desenvolvido para o **Culto do Empreendedor da Igreja Assembleia de Deus de União da Vitória - PR**, estruturado nas duas etapas:
+1. **Formulário Público (index.html)**: O link personalizado com a logo oficial de alta definição do Culto do Empreendedor para enviar aos irmãos, empresários e membros, onde preenchem apenas os 3 campos e **não têm acesso** aos pedidos das outras pessoas.
+2. **Painel do Administrador (admin.html)**: O mural protegido por senha restrita (**`104832`**) onde **somente a liderança pastoral e intercessores** veem todos os pedidos recebidos, com filtros por **Dia (Hoje)**, **Semana** e **Mês**.
 
 ---
 
-## 🎨 Logotipo Oficial
-- O sistema já vem com a logomarca vetorial em alta definição em [logo.svg](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/logo.svg).
-- **Personalização com sua própria imagem:** Se você tiver a imagem exata da sua igreja ou do seu designer em arquivo `.png` ou `.jpg`, basta salvá-la dentro da pasta `C:\Users\Usuario\.gemini\antigravity\scratch\oracoes-app` com o nome **`logo.png`**. O aplicativo a detectará e substituirá automaticamente!
+## 🎨 Logotipo Oficial em Alta Definição (HD)
+- O poster oficial do **Culto do Empreendedor** (com as 3 silhuetas profissionais e tipografia nobre) está integrado diretamente como **`logo.svg`** em altíssima definição vetorial (lossless/vetor, 100% nítido em qualquer tela retina, celular ou monitor 4K).
+- **Proporção Vertical (3:4):** As proporções verticais do poster foram preservadas com `aspect-ratio: 3 / 4`, cantos arredondados e borda sutil dourada, garantindo que a arte nunca fique esticada, achatada ou cortada.
+- **Personalização / Fallback:** Caso queira usar o arquivo de imagem raster (.png), basta salvá-lo como **`logo.png`** na mesma pasta. O sistema possui detecção e fallback automático.
 
 ---
 
@@ -23,13 +24,15 @@ Aplicativo desenvolvido para o **Culto do Empreendedor de União da Vitória - P
   3. **Qual é a sua oração ou propósito?** (Texto livre onde a pessoa abre o coração).
 - **Privacidade Total:** A pessoa não vê o mural. Ao clicar em enviar, ela recebe uma mensagem acolhedora de confirmação com um versículo de paz e a certeza de que a causa foi entregue ao intercessor.
 - **🏛️ Convite Presencial & Localização:** Opção interativa para quem desejar participar presencialmente do culto, com endereço (Rua Ipiranga, 357 — Centro, União da Vitória - PR) e rota direta no **Google Maps**.
-- **🏥 Visita Presencial em Hospitais (Capelania Pastoral):** Campo exclusivo com ícone de hospital e subtítulo explicativo onde familiares e membros podem solicitar a visita de um pastor ao leito de enfermos internados (perguntas: Confirmação de desejo da visita, Nome do Paciente, Hospital com seleção de hospitais de União da Vitória e Porto União, Número do Quarto/Leito/Ala e Telefone do Acompanhante).
+- **🏥 Visita Presencial em Hospitais (Capelania Pastoral):** Campo exclusivo com ícone de hospital e subtítulo explicativo onde familiares e membros podem solicitar a visita de um pastor ao leito de enfermos internados.
+  - **🗓️ Dia de Visitas:** As visitas aos hospitais são realizadas **exclusivamente às quartas-feiras**.
+  - **📞 Plantão dos Obreiros com WhatsApp Direto:** Acesso rápido ao contato do **Pastor Arnaldo** `(42) 99822-1056`, **Presbítero Nilzom** `(42) 99970-0880` e **Presbítero Moacir** `(42) 9995-6594` com botões diretos para conversar no WhatsApp.
 - **📸 Instagram Oficial:** Botão direto com link para o perfil exclusivo **`@cultodoempreendedoruva`** (https://www.instagram.com/cultodoempreendedoruva/).
 
 ---
 
 ### 2️⃣ Parte 2: Painel Privado do Administrador (`admin.html`)
-- **Acesso Restrito:** Protegido por PIN de segurança (o PIN padrão inicial é **`1234`**, que você pode alterar a qualquer momento nas configurações).
+- **Acesso Restrito:** Protegido por senha exclusiva do administrador (**`104832`**).
 - **Mural Exclusivo:** Somente você tem acesso aos pedidos recebidos.
 - **Filtros Temporais Exigidos:**
   - 📅 **Por Dia (Hoje)**: Mostra somente os pedidos que chegaram no dia de hoje.
@@ -40,7 +43,7 @@ Aplicativo desenvolvido para o **Culto do Empreendedor de União da Vitória - P
   - Botão **"Interceder Agora 🙏"**: Incrementa o contador de orações realizadas e marca o pedido como orado com toque suave de sino.
   - Botão **"Graça Alcançada 🎉"**: Registra testemunhos de orações respondidas.
   - **Anotações Pastorais**: Campo de anotação privada em cada pedido (ex: *"Orado no culto de quarta"*, *"Ligar para a pessoa"*).
-  - **🖨️ Imprimir / PDF**: Gera uma lista limpa para levar para cultos, reuniões de oração ou vigílias.
+  - **🖨️ Imprimir / PDF**: Gera uma lista limpa para levar para cultos, reuniões de oração ou vigílias (inclui nomes dos obreiros e capelania).
   - **🏥 Gestão de Visitas Hospitalares**: Destaque com etiqueta ciano e card especial contendo dados do leito, hospital, paciente e botão direto para falar com o acompanhante no WhatsApp.
   - **Filtro Rápido no Painel**: Seleção direta por "🏥 Visitas Hospitalares" no menu de status.
 
@@ -52,7 +55,7 @@ Basta abrir os arquivos no seu navegador:
 - **Para testar o formulário que você vai mandar para as pessoas:**
   - Dê um duplo clique em [index.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/index.html)
 - **Para acessar o seu painel de administrador:**
-  - Dê um duplo clique em [admin.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/admin.html) e digite o PIN `1234`.
+  - Dê um duplo clique em [admin.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/admin.html) e digite a senha `104832`.
 
 ---
 
@@ -66,6 +69,7 @@ oracoes-app/
 ├── admin.js          # Lógica do painel admin com filtros por Dia, Semana e Mês
 ├── style.css         # Estilização completa das duas telas (desktop e celular)
 ├── logo.svg          # Logomarca vetorial oficial do Culto do Empreendedor
+├── logo.jpg          # (Opcional) Logomarca personalizada em JPG ou PNG
 ├── vercel.json       # Configuração de URLs limpas para deploy na Vercel
 ├── .gitignore        # Arquivos ignorados pelo Git
 └── README.md         # Manual de instruções do sistema

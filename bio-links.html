@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Culto do Empreendedor • União da Vitória PR - Links Oficiais</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilos Específicos para a Página de Links da Bio */
+    body.bio-page {
+      background: #040812;
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 90%, rgba(245, 158, 11, 0.1) 0%, transparent 60%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 18px 50px;
+      color: #ffffff;
+    }
+
+    .bio-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .bio-avatar-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .bio-logo-aura {
+      position: absolute;
+      width: 140px;
+      height: 180px;
+      top: -10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.5) 0%, rgba(59, 130, 246, 0.25) 55%, transparent 75%);
+      filter: blur(24px);
+      animation: auraPulse 4s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    .bio-logo-img {
+      width: 120px;
+      height: auto;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 2px solid rgba(245, 158, 11, 0.6);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 158, 11, 0.3);
+      position: relative;
+      z-index: 2;
+      background: #060b14;
+    }
+
+    .bio-username {
+      margin-top: 16px;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-serif);
+      letter-spacing: -0.01em;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fbbf24;
+      color: #040812;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .bio-handle {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-top: 2px;
+      letter-spacing: 0.02em;
+    }
+
+    .bio-desc {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-top: 8px;
+      max-width: 380px;
+    }
+
+    .bio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .bio-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
+
+    /* Lista de Botões de Ação da Bio */
+    .bio-links-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .bio-link-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 20px;
+      background: rgba(10, 18, 34, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(14px);
+    }
+
+    .bio-link-card:hover {
+      transform: translateY(-3px) scale(1.015);
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 0 14px 34px rgba(245, 158, 11, 0.25), 0 0 20px rgba(245, 158, 11, 0.2);
+      background: rgba(18, 30, 56, 0.95);
+      color: #ffffff;
+    }
+
+    .bio-link-card.primary-gold {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(10, 18, 34, 0.9) 100%);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+
+    .bio-link-card.primary-gold:hover {
+      border-color: #fbbf24;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.35) 0%, rgba(18, 30, 56, 0.98) 100%);
+    }
+
+    .bio-link-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .primary-gold .bio-link-icon {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .bio-link-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .bio-link-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .primary-gold .bio-link-title {
+      color: #fef08a;
+    }
+
+    .bio-link-desc {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .bio-link-arrow {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      transition: all 0.2s;
+    }
+
+    .bio-link-card:hover .bio-link-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    /* Caixa de Versículo de Benção */
+    .bio-verse-box {
+      width: 100%;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px dashed rgba(245, 158, 11, 0.35);
+      border-radius: 20px;
+      padding: 18px 20px;
+      text-align: center;
+    }
+
+    .bio-verse-text {
+      font-size: 0.86rem;
+      font-style: italic;
+      color: #fef08a;
+      line-height: 1.5;
+    }
+
+    .bio-verse-ref {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #fbbf24;
+      margin-top: 6px;
+    }
+
+    /* Redes Sociais no Rodapé */
+    .bio-social-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .bio-social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .bio-social-btn:hover {
+      background: #fbbf24;
+      color: #040812;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .bio-footer {
+      text-align: center;
+      font-size: 0.76rem;
+      color: #64748b;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body class="bio-page">
+
+  <div class="bio-container">
+    
+    <!-- Topo / Avatar com Logo Oficial -->
+    <header class="bio-avatar-block">
+      <div class="bio-logo-aura"></div>
+      <img src="file:///C:/Users/Usuario/.gemini/antigravity/brain/ad47eaa5-68d0-4fd8-bc4f-372cf1acd81d/.user_uploaded/media_1792183786020_a865afdf.png" 
+           alt="Culto do Empreendedor União da Vitória PR" 
+           class="bio-logo-img"
+           onerror="this.onerror=null; this.src='logo.svg';">
+
+      <h1 class="bio-username">
+        Culto do Empreendedor
+        <span class="verified-badge" title="Canal Oficial">✓</span>
+      </h1>
+      <span class="bio-handle">@cultodoempreendedoruva</span>
+
+      <p class="bio-desc">
+        Princípios bíblicos para governar seus negócios, carreira e família com sabedoria, fé e autoridade.
+      </p>
+
+      <div class="bio-tags">
+        <span class="bio-tag">🏛️ Assembleia de Deus</span>
+        <span class="bio-tag">📍 União da Vitória - PR</span>
+        <span class="bio-tag">🗓️ Toda Segunda-feira</span>
+      </div>
+    </header>
+
+    <!-- Lista de Links Oficiais -->
+    <main class="bio-links-list">
+
+      <!-- Link 1: Mural de Oração (Principal) -->
+      <a href="index.html" class="bio-link-card primary-gold">
+        <div class="bio-link-icon">🙏</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title">Deixar Pedido de Oração</span>
+          <span class="bio-link-desc">100% confidencial • Apresentamos seu propósito em oração</span>
+        </div>
+        <span class="bio-link-arrow">↗</span>
+      </a>
+
+      <!-- Link 2: Devocional no WhatsApp -->
+      <a href="index.html" class="bio-link-card">
+        <div class="bio-link-icon">📖</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title">Receber Devocional no WhatsApp</span>
+          <span class="bio-link-desc">Palavras diárias de sabedoria e vitória empresarial</span>
+        </div>
+        <span class="bio-link-arrow">↗</span>
+      </a>
+
+      <!-- Link 3: Como Chegar (Google Maps) -->
+      <a href="https://maps.google.com/?q=Rua+Ipiranga,+357+-+Centro,+União+da+Vitória+-+PR" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="bio-link-card">
+        <div class="bio-link-icon">📍</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title">Como Chegar (Google Maps)</span>
+          <span class="bio-link-desc">Rua Ipiranga, 357 — Centro, União da Vitória - PR</span>
+        </div>
+        <span class="bio-link-arrow">↗</span>
+      </a>
+
+      <!-- Link 4: Falar com os Pastores / WhatsApp -->
+      <a href="https://wa.me/?text=A%20paz%20do%20Senhor!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Culto%20do%20Empreendedor%20de%20Uni%C3%A3o%20da%20Vit%C3%B3ria." 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="bio-link-card">
+        <div class="bio-link-icon">💬</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title">Falar no WhatsApp Oficial</span>
+          <span class="bio-link-desc">Atendimento pastoral e informações do culto</span>
+        </div>
+        <span class="bio-link-arrow">↗</span>
+      </a>
+
+      <!-- Link: Solicitar Visita Hospitalar -->
+      <a href="index.html#hospital-visit-card" class="bio-link-card" style="border-color: rgba(56, 189, 248, 0.45); background: linear-gradient(135deg, rgba(14, 165, 233, 0.18) 0%, rgba(10, 18, 34, 0.9) 100%);">
+        <div class="bio-link-icon" style="background: rgba(14, 165, 233, 0.2); border-color: rgba(56, 189, 248, 0.4);">🏥</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title" style="color: #7dd3fc;">Visita Presencial em Hospitais</span>
+          <span class="bio-link-desc">Capelania pastoral e oração no leito para internados</span>
+        </div>
+        <span class="bio-link-arrow" style="color: #38bdf8;">↗</span>
+      </a>
+
+      <!-- Link 5: Instagram Oficial -->
+      <a href="https://www.instagram.com/cultodoempreendedoruva/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="bio-link-card">
+        <div class="bio-link-icon">📸</div>
+        <div class="bio-link-content">
+          <span class="bio-link-title">Seguir no Instagram</span>
+          <span class="bio-link-desc">Acompanhe fotos, avisos e vídeos no @cultodoempreendedoruva</span>
+        </div>
+        <span class="bio-link-arrow">↗</span>
+      </a>
+
+    </main>
+
+    <!-- Versículo do Empreendedor -->
+    <div class="bio-verse-box">
+      <p class="bio-verse-text">
+        "Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos."
+      </p>
+      <span class="bio-verse-ref">— Provérbios 16:3</span>
+    </div>
+
+    <!-- Redes e Acesso Administrativo -->
+    <footer class="bio-footer">
+      <p>Igreja Assembleia de Deus • Templo Sede</p>
+      <p style="margin-top: 4px;">Culto do Empreendedor de União da Vitória - PR</p>
+      <p style="margin-top: 8px; opacity: 0.7;">
+        <a href="admin.html" style="color: #fbbf24; text-decoration: none;">🔒 Acesso do Intercessor / Painel</a>
+      </p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

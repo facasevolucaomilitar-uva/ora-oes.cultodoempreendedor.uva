@@ -122,50 +122,52 @@ body {
 
 .logo-glow-aura {
   position: absolute;
-  width: 170px;
-  height: 220px;
-  border-radius: 30px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(59, 130, 246, 0.25) 55%, transparent 75%);
-  filter: blur(28px);
+  width: 320px;
+  height: 90px;
+  border-radius: 50px;
+  background: radial-gradient(ellipse, rgba(245, 158, 11, 0.35) 0%, rgba(255, 255, 255, 0.15) 50%, transparent 75%);
+  filter: blur(22px);
   animation: auraPulse 4s infinite ease-in-out;
   pointer-events: none;
 }
 
 .logo-glow-aura.small {
-  width: 120px;
-  height: 150px;
-  filter: blur(20px);
+  width: 240px;
+  height: 70px;
+  border-radius: 40px;
+  filter: blur(16px);
 }
 
 @keyframes auraPulse {
   0%, 100% {
     opacity: 0.5;
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
   50% {
-    opacity: 0.95;
-    transform: scale(1.06);
+    opacity: 0.9;
+    transform: scale(1.04);
   }
 }
 
 .culto-logo {
-  width: 145px;
+  width: 340px;
+  max-width: 90vw;
   height: auto;
-  aspect-ratio: 3/4;
-  border-radius: 20px;
-  object-fit: cover;
-  border: 2px solid rgba(245, 158, 11, 0.5);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 158, 11, 0.28);
+  aspect-ratio: 7 / 2;
+  border-radius: 14px;
+  object-fit: contain;
+  border: none;
+  box-shadow: none;
   position: relative;
   z-index: 2;
-  background: #080e1a;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  background: transparent;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
 }
 
 .culto-logo:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: #f59e0b;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 45px rgba(245, 158, 11, 0.45);
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.3));
 }
 
 /* Badge Oficial */
@@ -886,23 +888,214 @@ body {
   color: var(--gold);
 }
 
-.btn-new-submission {
-  background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 12px 28px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 8px;
+/* ========================================================
+   Painel de Ações Coordenadas e Simétricas na Confirmação
+   (Google Maps, Instagram @cultodoempreendedoruva e Novo Envio)
+   ======================================================== */
+.conf-coordinated-actions {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-.btn-new-submission:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+/* Linha com 2 Botões de Conexão Simétricos (50% / 50%) */
+.conf-buttons-row-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Base Comum dos Botões Simétricos */
+.btn-conf-sym {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  min-height: 58px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  text-align: left;
+  border: 1.5px solid transparent;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.btn-conf-sym:active {
+  transform: scale(0.97) !important;
+}
+
+.sym-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.insta-svg-sym {
+  stroke: #ffffff;
+  width: 20px;
+  height: 20px;
+}
+
+.sym-btn-text-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  margin: 0 10px;
+  line-height: 1.25;
+}
+
+.sym-btn-sub {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.sym-btn-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sym-btn-arrow {
+  font-size: 1rem;
+  opacity: 0.6;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.btn-conf-sym:hover .sym-btn-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.btn-conf-sym:hover .sym-btn-icon {
+  transform: scale(1.08);
+}
+
+/* 1. Botão Simétrico Google Maps */
+.btn-conf-sym-maps {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+}
+
+.btn-conf-sym-maps .sym-btn-icon {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.btn-conf-sym-maps .sym-btn-sub {
+  color: #93c5fd;
+}
+
+.btn-conf-sym-maps .sym-btn-title {
+  color: #ffffff;
+}
+
+.btn-conf-sym-maps:hover {
+  background: rgba(37, 99, 235, 0.25);
+  border-color: #60a5fa;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+/* 2. Botão Simétrico Instagram Culto do Empreendedor */
+.btn-conf-sym-insta {
+  background: linear-gradient(135deg, rgba(240, 148, 51, 0.12) 0%, rgba(220, 39, 67, 0.14) 50%, rgba(188, 24, 136, 0.12) 100%);
+  border-color: rgba(225, 48, 108, 0.45);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.18);
+}
+
+.btn-conf-sym-insta .sym-btn-icon {
+  background: linear-gradient(135deg, rgba(240, 148, 51, 0.35) 0%, rgba(220, 39, 67, 0.35) 100%);
+}
+
+.btn-conf-sym-insta .sym-btn-sub {
+  color: #f472b6;
+}
+
+.btn-conf-sym-insta .sym-btn-title {
+  color: #ffffff;
+}
+
+.btn-conf-sym-insta:hover {
+  background: linear-gradient(135deg, rgba(240, 148, 51, 0.25) 0%, rgba(220, 39, 67, 0.3) 50%, rgba(188, 24, 136, 0.25) 100%);
+  border-color: #ec4899;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.38);
+}
+
+/* 3. Botão Principal Simétrico: Enviar Outro Pedido (Full Width) */
+.btn-conf-sym-submit {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(217, 119, 6, 0.14) 100%);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.16);
+}
+
+.btn-conf-sym-submit .sym-btn-icon {
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.btn-conf-sym-submit .sym-btn-sub {
+  color: #fde68a;
+}
+
+.btn-conf-sym-submit .sym-btn-title {
+  color: #fbbf24;
+}
+
+.btn-conf-sym-submit:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  border-color: #fbbf24;
+  color: #070d18;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.45);
+}
+
+.btn-conf-sym-submit:hover .sym-btn-icon {
+  background: rgba(7, 13, 24, 0.2);
+}
+
+.btn-conf-sym-submit:hover .sym-btn-sub {
+  color: #451a03;
+}
+
+.btn-conf-sym-submit:hover .sym-btn-title {
+  color: #070d18;
+}
+
+.btn-conf-sym-submit:hover .sym-btn-arrow {
+  color: #070d18;
+  transform: rotate(180deg);
+}
+
+/* Suporte legado se btn-new-submission for chamado isoladamente */
+.btn-new-submission {
+  display: none;
 }
 
 .public-footer {
@@ -965,16 +1158,19 @@ body {
 }
 
 .admin-login-logo {
-  width: 105px;
+  width: 260px;
+  max-width: 90%;
   height: auto;
-  aspect-ratio: 3/4;
-  border-radius: 16px;
-  object-fit: cover;
-  border: 2px solid rgba(245, 158, 11, 0.5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.25);
+  aspect-ratio: 7 / 2;
+  border-radius: 12px;
+  object-fit: contain;
+  border: none;
+  box-shadow: none;
   position: relative;
   z-index: 2;
-  background: #080e1a;
+  background: transparent;
+  display: block;
+  margin: 0 auto;
 }
 
 .login-title {
@@ -1077,14 +1273,15 @@ body {
 }
 
 .admin-brand-logo {
-  width: 46px;
+  width: 140px;
+  max-width: 45vw;
   height: auto;
-  aspect-ratio: 3/4;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1.5px solid var(--gold);
-  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
-  background: #080e1a;
+  aspect-ratio: 7 / 2;
+  border-radius: 6px;
+  object-fit: contain;
+  border: none;
+  background: transparent;
+  display: block;
 }
 
 .admin-title {
@@ -1837,10 +2034,41 @@ body {
   letter-spacing: 0.05em;
 }
 
+.badge-wednesday {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .hospital-desc {
   font-size: 0.83rem;
   color: #94a3b8;
   line-height: 1.45;
+}
+
+.hospital-day-highlight {
+  display: block;
+  margin-top: 5px;
+  color: #fef08a;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.hospital-day-highlight strong {
+  color: #fbbf24;
+}
+
+.hospital-day-highlight u {
+  text-decoration-color: #f59e0b;
 }
 
 .hospital-checkbox-wrap {
@@ -1892,6 +2120,166 @@ body {
 
 .hospital-info-banner strong {
   color: #38bdf8;
+}
+
+.hospital-wednesday-notice {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-left: 4px solid #f59e0b;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #fef3c7;
+  line-height: 1.45;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hospital-wednesday-notice strong {
+  color: #fbbf24 !important;
+}
+
+.hospital-wednesday-notice u {
+  text-decoration-color: #f59e0b;
+  font-weight: 800;
+}
+
+/* ====================================================
+   Bloco dos Obreiros na Capelania / Visita Hospitalar
+   ==================================================== */
+.obreiros-contact-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(7, 18, 36, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.obreiros-box-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.obreiros-header-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.obreiros-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: -0.01em;
+}
+
+.obreiros-subtitle {
+  margin: 3px 0 0 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.obreiros-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.obreiro-card {
+  background: rgba(15, 30, 52, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.obreiro-card:hover {
+  background: rgba(20, 42, 74, 0.85);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.2);
+}
+
+.obreiro-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.obreiro-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+}
+
+.obreiro-badge.pastor {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.obreiro-badge.presbitero {
+  background: rgba(56, 189, 248, 0.18);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.obreiro-name {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.obreiro-phone {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.btn-whatsapp-obreiro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #25d366 0%, #16a34a 100%);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-whatsapp-obreiro:hover {
+  background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.55);
+  color: #ffffff;
+}
+
+.btn-whatsapp-obreiro:active {
+  transform: scale(0.96) !important;
+}
+
+.wa-icon-svg {
+  flex-shrink: 0;
 }
 
 .hospital-grid-fields {
@@ -2334,38 +2722,6 @@ body {
   40%, 80% { transform: translateX(6px); }
 }
 
-/* Atalho para o Admin na Tela de Confirmação */
-.conf-admin-shortcut {
-  margin-top: 14px;
-  text-align: center;
-  width: 100%;
-}
-
-.btn-conf-admin {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1.5px solid rgba(245, 158, 11, 0.45);
-  color: #fbbf24;
-  padding: 12px 22px;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.88rem;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-}
-
-.btn-conf-admin:hover {
-  background: rgba(245, 158, 11, 0.25);
-  border-color: #fbbf24;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
-}
-
 /* ========================================================
    Botão Flutuante Fixo do Administrador (Canto Inferior Direito)
    Sempre visível em qualquer ponto de rolagem da tela
@@ -2546,13 +2902,17 @@ button:active,
   }
 
   .culto-logo {
-    width: 112px;
-    height: 112px;
+    width: 270px;
+    max-width: 92vw;
+    aspect-ratio: 7 / 2;
+    height: auto;
+    object-fit: contain;
   }
 
   .logo-glow-aura {
-    width: 120px;
-    height: 120px;
+    width: 260px;
+    height: 70px;
+    border-radius: 40px;
   }
 
   .brand-badge {
@@ -2748,6 +3108,24 @@ button:active,
     padding-top: 14px;
   }
 
+  /* Bloco de Obreiros no Celular */
+  .obreiros-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .obreiro-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+  }
+
+  .btn-whatsapp-obreiro {
+    padding: 8px 14px;
+    flex-shrink: 0;
+  }
+
   /* Cartão de Urgência */
   .urgency-toggle-card {
     padding: 12px;
@@ -2794,6 +3172,26 @@ button:active,
 
   .conf-detail-box {
     padding: 14px;
+    font-size: 0.84rem;
+  }
+
+  /* Ações Coordenadas e Simétricas da Confirmação no Celular */
+  .conf-coordinated-actions {
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .conf-buttons-row-dual {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .btn-conf-sym {
+    padding: 12px 14px;
+    min-height: 54px;
+  }
+
+  .sym-btn-title {
     font-size: 0.84rem;
   }
 

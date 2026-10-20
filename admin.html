@@ -25,27 +25,27 @@
         <div class="login-logo-wrapper">
           <div class="logo-glow-aura small"></div>
           <img src="logo.svg" 
-               alt="Culto do Empreendedor - União da Vitória PR" 
+               alt="Igreja Evangélica Assembleia de Deus - União da Vitória PR" 
                class="admin-login-logo">
         </div>
         <h2 class="login-title">Painel do Intercessor</h2>
-        <p class="login-subtitle">Culto do Empreendedor • União da Vitória - PR</p>
+        <p class="login-subtitle">Assembleia de Deus • União da Vitória - PR</p>
       </div>
 
       <form id="admin-login-form" class="login-form">
         <div class="pin-input-group">
-          <label for="admin-pin-input">Digite o PIN de Segurança:</label>
-          <input type="password" id="admin-pin-input" maxlength="10" placeholder="••••" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" required autofocus>
-          <small class="pin-hint">PIN inicial padrão: <strong>1234</strong> (você pode alterar nas configurações)</small>
+          <label for="admin-pin-input">Senha de Acesso do Administrador:</label>
+          <input type="password" id="admin-pin-input" maxlength="20" placeholder="••••••••" autocomplete="current-password" required autofocus>
+          <small class="pin-hint" style="color: var(--text-muted);">Acesso restrito e exclusivo da administração pastoral.</small>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">
-          <span>Desbloquear Mural de Oração</span>
-          <span>🔓</span>
+          <span>Acessar Painel de Administração</span>
+          <span>🔒</span>
         </button>
 
         <p id="login-error-msg" class="login-error hidden">
-          ⚠️ PIN incorreto. Tente novamente ou use o padrão 1234.
+          ⚠️ Senha incorreta. Acesso restrito exclusivamente ao administrador.
         </p>
       </form>
       <div class="login-footer">
@@ -62,10 +62,10 @@
       <div class="admin-topbar-inner max-w">
         <div class="admin-brand">
           <img src="logo.svg" 
-               alt="Culto do Empreendedor" 
+               alt="Igreja Evangélica Assembleia de Deus - União da Vitória PR" 
                class="admin-brand-logo">
           <div>
-            <h1 class="admin-title">Culto do Empreendedor</h1>
+            <h1 class="admin-title">Assembleia de Deus</h1>
             <p class="admin-role-badge">União da Vitória - PR • Painel de Oração</p>
           </div>
         </div>
@@ -176,9 +176,9 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="input-new-pin">Alterar PIN de Acesso:</label>
-            <input type="password" id="input-new-pin" maxlength="10" placeholder="Novo PIN numérico">
-            <small style="color: var(--text-muted);">Deixe vazio se não quiser alterar.</small>
+            <label for="input-new-pin">Alterar Senha do Administrador:</label>
+            <input type="password" id="input-new-pin" maxlength="20" placeholder="Digite uma nova senha">
+            <small style="color: var(--text-muted);">Deixe vazio para manter a senha atual inalterada.</small>
           </div>
 
           <div class="form-group" style="margin-top: 10px;">
@@ -221,7 +221,7 @@
         <div class="modal-header">
           <div>
             <h2 class="modal-title">🏥 Lista & Relatório de Visitas Hospitalares (PDF)</h2>
-            <p class="modal-subtext">Culto do Empreendedor • Igreja Assembleia de Deus • União da Vitória - PR</p>
+            <p class="modal-subtext">Culto do Empreendedor • Igreja Assembleia de Deus • União da Vitória - PR • <span style="color: #fbbf24; font-weight: 700;">🗓️ Visitas: Quartas-feiras</span></p>
           </div>
           <button class="btn-close-modal" id="btn-close-print-hospital">&times;</button>
         </div>

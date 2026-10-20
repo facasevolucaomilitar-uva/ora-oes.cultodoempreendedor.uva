@@ -4,7 +4,8 @@
  */
 
 const STORAGE_KEY = 'circulo_oracoes_db_v1';
-const PIN_KEY = 'circulo_oracoes_admin_pin_v1';
+const PIN_KEY = 'circulo_oracoes_admin_pin_v2';
+const DEFAULT_ADMIN_PASSWORD = '104832';
 const AUTH_SESSION_KEY = 'circulo_admin_session_auth_v1';
 
 // Dados de Exemplo Iniciais (caso seja o primeiro acesso)
@@ -181,15 +182,23 @@ class AdminApp {
     }
   }
 
-  // --- PIN & Autenticação ---
+  // --- Senha & Autenticação ---
   ensureDefaultPin() {
-    if (!localStorage.getItem(PIN_KEY)) {
-      localStorage.setItem(PIN_KEY, '1234');
+    const current = localStorage.getItem(PIN_KEY);
+    const legacy = localStorage.getItem('circulo_oracoes_admin_pin_v1');
+    if (!current || current === '1234' || legacy === '1234') {
+      localStorage.setItem(PIN_KEY, DEFAULT_ADMIN_PASSWORD);
+      localStorage.removeItem('circulo_oracoes_admin_pin_v1');
     }
   }
 
   getSavedPin() {
-    return localStorage.getItem(PIN_KEY) || '1234';
+    const pin = localStorage.getItem(PIN_KEY);
+    if (!pin || pin === '1234') {
+      localStorage.setItem(PIN_KEY, DEFAULT_ADMIN_PASSWORD);
+      return DEFAULT_ADMIN_PASSWORD;
+    }
+    return pin;
   }
 
   setNewPin(newPin) {
@@ -385,11 +394,11 @@ class AdminApp {
       const newPin = document.getElementById('input-new-pin').value.trim();
       if (newPin) {
         if (newPin.length < 3) {
-          alert('O PIN deve ter no mínimo 3 dígitos.');
+          alert('A nova senha deve ter no mínimo 3 caracteres.');
           return;
         }
         this.setNewPin(newPin);
-        this.showToast('PIN alterado com sucesso!');
+        this.showToast('Senha do administrador alterada com sucesso!');
       }
       modalSettings.classList.add('hidden');
     });
@@ -914,11 +923,11 @@ class AdminApp {
       <div class="hosp-doc-wrapper">
         <div class="hosp-doc-header">
           <div class="hosp-doc-brand">
-            <img src="logo.png" alt="Logo" class="hosp-doc-logo" onerror="this.onerror=null; this.src='logo.svg';">
+            <img src="logo.svg" alt="Logo" class="hosp-doc-logo" onerror="this.onerror=null; this.src='logo.jpg';">
             <div>
               <div class="hosp-doc-church">IGREJA ASSEMBLEIA DE DEUS • UNIÃO DA VITÓRIA - PR</div>
               <h1 class="hosp-doc-title">RELATÓRIO DE VISITAS HOSPITALARES & CAPELANIA</h1>
-              <div class="hosp-doc-sub">Culto do Empreendedor • Rua Ipiranga, 357 — Centro • União da Vitória - PR</div>
+              <div class="hosp-doc-sub">Culto do Empreendedor • Rua Ipiranga, 357 — Centro • União da Vitória - PR • <strong>Visitas às Quartas-feiras</strong></div>
             </div>
           </div>
           <div class="hosp-doc-meta">
@@ -948,13 +957,13 @@ class AdminApp {
         <div class="hosp-doc-footer-signatures">
           <div class="hosp-sig-box">
             <div class="hosp-sig-line"></div>
-            <div class="hosp-sig-title">Pastor / Capelão Responsável</div>
+            <div class="hosp-sig-title">Pastor Arnaldo • Capelão Responsável</div>
             <div class="hosp-sig-desc">Culto do Empreendedor • União da Vitória - PR</div>
           </div>
           <div class="hosp-sig-box">
             <div class="hosp-sig-line"></div>
-            <div class="hosp-sig-title">Coordenação de Visitas Hospitalares</div>
-            <div class="hosp-sig-desc">Igreja Assembleia de Deus • Templo Sede</div>
+            <div class="hosp-sig-title">Presb. Nilzom & Presb. Moacir • Obreiros</div>
+            <div class="hosp-sig-desc">Coordenação de Visitas Hospitalares • Templo Sede</div>
           </div>
         </div>
       </div>
@@ -1194,11 +1203,11 @@ class AdminApp {
 '  </div>' +
 '  <div class="header-box">' +
 '    <div class="header-left">' +
-'      <img src="logo.png" alt="Logo" class="header-logo" onerror="this.onerror=null; this.src=\'logo.svg\';">' +
+'      <img src="logo.svg" alt="Logo" class="header-logo" onerror="this.onerror=null; this.src=\'logo.jpg\';">' +
 '      <div>' +
 '        <div class="church-name">IGREJA ASSEMBLEIA DE DEUS • UNIÃO DA VITÓRIA - PR</div>' +
 '        <div class="report-title">RELATÓRIO DE VISITAS HOSPITALARES & CAPELANIA</div>' +
-'        <div class="church-sub">Culto do Empreendedor • Rua Ipiranga, 357 — Centro • União da Vitória - PR</div>' +
+'        <div class="church-sub">Culto do Empreendedor • Rua Ipiranga, 357 — Centro • União da Vitória - PR • <strong>Visitas às Quartas-feiras</strong></div>' +
 '      </div>' +
 '    </div>' +
 '    <div class="header-meta">' +
@@ -1227,13 +1236,13 @@ class AdminApp {
 '  <div class="footer-signatures">' +
 '    <div class="sig-box">' +
 '      <div class="sig-line"></div>' +
-'      <div class="sig-title">Pastor / Capelão Responsável</div>' +
+'      <div class="sig-title">Pastor Arnaldo • Capelão Responsável</div>' +
 '      <div class="sig-sub">Culto do Empreendedor • União da Vitória - PR</div>' +
 '    </div>' +
 '    <div class="sig-box">' +
 '      <div class="sig-line"></div>' +
-'      <div class="sig-title">Coordenação de Assistência Hospitalar</div>' +
-'      <div class="sig-sub">Igreja Assembleia de Deus • Templo Sede</div>' +
+'      <div class="sig-title">Presb. Nilzom & Presb. Moacir • Obreiros</div>' +
+'      <div class="sig-sub">Coordenação de Visitas Hospitalares • Templo Sede</div>' +
 '    </div>' +
 '  </div>' +
 '  <script>' +
