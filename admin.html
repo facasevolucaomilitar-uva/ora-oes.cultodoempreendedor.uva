@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#060b14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Painel do Intercessor">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>Painel do Intercessor - Mural Privado de Oração</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+
+  <!-- TELA DE LOGIN / PIN DO ADMINISTRADOR -->
+  <div id="admin-login-screen" class="login-overlay">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo-wrapper">
+          <div class="logo-glow-aura small"></div>
+          <img src="logo.svg" 
+               alt="Culto do Empreendedor - União da Vitória PR" 
+               class="admin-login-logo">
+        </div>
+        <h2 class="login-title">Painel do Intercessor</h2>
+        <p class="login-subtitle">Culto do Empreendedor • União da Vitória - PR</p>
+      </div>
+
+      <form id="admin-login-form" class="login-form">
+        <div class="pin-input-group">
+          <label for="admin-pin-input">Digite o PIN de Segurança:</label>
+          <input type="password" id="admin-pin-input" maxlength="10" placeholder="••••" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" required autofocus>
+          <small class="pin-hint">PIN inicial padrão: <strong>1234</strong> (você pode alterar nas configurações)</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <span>Desbloquear Mural de Oração</span>
+          <span>🔓</span>
+        </button>
+
+        <p id="login-error-msg" class="login-error hidden">
+          ⚠️ PIN incorreto. Tente novamente ou use o padrão 1234.
+        </p>
+      </form>
+      <div class="login-footer">
+        <a href="index.html" class="btn-link">← Voltar para o Formulário Público</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAINEL PRINCIPAL DO ADMINISTRADOR (Exibido após autenticar) -->
+  <div id="admin-main-dashboard" class="admin-dashboard hidden">
+    
+    <!-- Topbar Admin -->
+    <header class="admin-topbar">
+      <div class="admin-topbar-inner max-w">
+        <div class="admin-brand">
+          <img src="logo.svg" 
+               alt="Culto do Empreendedor" 
+               class="admin-brand-logo">
+          <div>
+            <h1 class="admin-title">Culto do Empreendedor</h1>
+            <p class="admin-role-badge">União da Vitória - PR • Painel de Oração</p>
+          </div>
+        </div>
+
+        <div class="admin-actions">
+          <button id="btn-print-hospital" class="btn btn-secondary btn-sm btn-print-hosp-top" title="Gerar Lista em PDF das Visitas Feitas nos Hospitais">
+            🏥 Visitas Hospitalares (PDF)
+          </button>
+          <button id="btn-print-list" class="btn btn-secondary btn-sm" title="Imprimir lista para o momento de oração">
+            🖨️ Imprimir / PDF
+          </button>
+          <button id="btn-open-settings" class="btn btn-secondary btn-sm" title="Configurações e Senha">
+            ⚙️ Configurações
+          </button>
+          <button id="btn-admin-logout" class="btn btn-subtle" title="Sair do painel">
+            Sair 🚪
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Resumo & Estatísticas por Período -->
+    <section class="admin-summary max-w">
+      <div class="summary-cards-grid">
+        <div class="summary-card active-card" data-period="all">
+          <span class="sum-label">Total Geral</span>
+          <span class="sum-count" id="count-total">0</span>
+          <span class="sum-sub">Pedidos recebidos</span>
+        </div>
+
+        <div class="summary-card" data-period="today">
+          <span class="sum-label">📅 Hoje</span>
+          <span class="sum-count" id="count-today">0</span>
+          <span class="sum-sub">Pedidos hoje</span>
+        </div>
+
+        <div class="summary-card" data-period="week">
+          <span class="sum-label">🗓️ Esta Semana</span>
+          <span class="sum-count" id="count-week">0</span>
+          <span class="sum-sub">Últimos 7 dias</span>
+        </div>
+
+        <div class="summary-card" data-period="month">
+          <span class="sum-label">📆 Este Mês</span>
+          <span class="sum-count" id="count-month">0</span>
+          <span class="sum-sub">Últimos 30 dias</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Filtros e Busca -->
+    <section class="admin-filter-bar max-w">
+      <!-- Seletor de Período (Hoje, Semana, Mês, Todos) -->
+      <div class="period-tabs" id="period-tabs">
+        <span class="filter-label">Período:</span>
+        <button class="period-btn active" data-period="all">Todos</button>
+        <button class="period-btn" data-period="today">📅 Por Dia (Hoje)</button>
+        <button class="period-btn" data-period="week">🗓️ Por Semana</button>
+        <button class="period-btn" data-period="month">📆 Por Mês</button>
+      </div>
+
+      <!-- Filtro por Status e Busca -->
+      <div class="search-and-status">
+        <div class="admin-search-box">
+          <span>🔍</span>
+          <input type="text" id="admin-search-input" placeholder="Buscar por nome, quem recebe ou propósito...">
+        </div>
+
+        <select id="select-status-filter" class="status-dropdown">
+          <option value="all">Todos os Status</option>
+          <option value="hospital">🏥 Visitas Hospitalares</option>
+          <option value="pending">🟡 Aguardando Oração</option>
+          <option value="prayed">🟢 Já Intercedido / Orado</option>
+          <option value="answered">🎉 Graça Alcançada</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Mural de Pedidos do Administrador -->
+    <main class="admin-content max-w">
+      <div class="content-header-row">
+        <h2 class="content-heading" id="view-title">Todos os Pedidos Recebidos</h2>
+        <span class="content-counter" id="visible-counter">Exibindo 0 pedidos</span>
+      </div>
+
+      <!-- Grid de Cartões -->
+      <div class="admin-prayers-grid" id="admin-prayers-grid">
+        <!-- Renderizado dinamicamente pelo admin.js -->
+      </div>
+
+      <!-- Estado Vazio -->
+      <div class="empty-state hidden" id="admin-empty-state">
+        <div class="empty-icon">🕊️</div>
+        <h3>Nenhum pedido encontrado neste período</h3>
+        <p>Compartilhe o link do formulário público com as pessoas para receber os pedidos aqui.</p>
+        <a href="index.html" class="btn btn-primary" style="margin-top: 14px;" target="_blank">
+          Abrir Link do Formulário Público ↗️
+        </a>
+      </div>
+    </main>
+
+    <!-- MODAL: Configurações & Alterar PIN -->
+    <div id="modal-settings" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 class="modal-title">⚙️ Configurações do Intercessor</h2>
+          <button class="btn-close-modal" id="btn-close-settings">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="input-new-pin">Alterar PIN de Acesso:</label>
+            <input type="password" id="input-new-pin" maxlength="10" placeholder="Novo PIN numérico">
+            <small style="color: var(--text-muted);">Deixe vazio se não quiser alterar.</small>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px;">
+            <label>Backup e Segurança dos Dados:</label>
+            <div style="display: flex; gap: 10px; margin-top: 6px;">
+              <button id="btn-admin-export" class="btn btn-secondary btn-sm">Salvar Backup (JSON)</button>
+              <button id="btn-seed-samples" class="btn btn-subtle btn-sm">Carregar Exemplos</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions" style="padding: 16px 24px; border-top: 1px solid var(--border-color);">
+          <button id="btn-save-settings" class="btn btn-primary">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Testemunho / Graça Alcançada -->
+    <div id="modal-admin-testimony" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 class="modal-title">🎉 Registrar Graça Alcançada</h2>
+          <button class="btn-close-modal" id="btn-close-admin-testimony">&times;</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="target-prayer-id">
+          <div class="form-group">
+            <label for="admin-testimony-notes">Relato da Vitória ou Resposta de Oração:</label>
+            <textarea id="admin-testimony-notes" rows="4" placeholder="Escreva como a oração foi respondida por Deus..."></textarea>
+          </div>
+        </div>
+        <div class="modal-actions" style="padding: 16px 24px; border-top: 1px solid var(--border-color);">
+          <button id="btn-confirm-testimony" class="btn btn-accent">Celebrar Graça 🙌</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Imprimir / PDF de Visitas Hospitalares -->
+    <div id="modal-print-hospital" class="modal-overlay hidden">
+      <div class="modal-card modal-large">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title">🏥 Lista & Relatório de Visitas Hospitalares (PDF)</h2>
+            <p class="modal-subtext">Culto do Empreendedor • Igreja Assembleia de Deus • União da Vitória - PR</p>
+          </div>
+          <button class="btn-close-modal" id="btn-close-print-hospital">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="hosp-print-toolbar">
+            <div class="hosp-print-filter-wrap">
+              <label for="select-hosp-print-status"><strong>Filtrar Visitas:</strong></label>
+              <select id="select-hosp-print-status" class="hosp-select-filter">
+                <option value="all">Todas as Visitas Hospitalares</option>
+                <option value="prayed">Visitas Feitas / Realizadas (🟢 Oradas no Leito)</option>
+                <option value="pending">Visitas Pendentes (🟡 Aguardando Visita)</option>
+                <option value="answered">Visitas Concluídas com Graça (🎉 Altas Médicas)</option>
+              </select>
+            </div>
+            <div id="hosp-print-summary-count" class="hosp-print-count-badge">
+              Carregando visitas...
+            </div>
+          </div>
+
+          <!-- Documento Visual Pré-visualizado -->
+          <div class="hosp-print-preview-scroll">
+            <div id="hosp-print-sheet-content" class="hosp-print-sheet">
+              <!-- Renderizado dinamicamente via JS -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions modal-actions-between">
+          <button id="btn-close-print-hosp-bottom" class="btn btn-secondary">Fechar</button>
+          <button id="btn-confirm-print-hospital" class="btn btn-primary btn-print-hosp-action">
+            🖨️ Imprimir / Salvar em PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden">
+    <span id="toast-message">Mensagem</span>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

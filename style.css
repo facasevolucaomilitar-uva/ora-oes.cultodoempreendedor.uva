@@ -1,0 +1,3048 @@
+/* ========================================================
+   Culto do Empreendedor • União da Vitória - PR
+   Folha de Estilos de Alto Padrão (Dark Luxury Executive)
+   1. Design do Formulário Público (index.html)
+   2. Design do Painel do Administrador (admin.html)
+   3. Estilos de Impressão (@media print)
+======================================================== */
+
+:root {
+  /* Paleta Executiva Noturna com Detalhes em Ouro Imperial */
+  --bg-primary: #060b14;
+  --bg-secondary: #0a1222;
+  --bg-card: rgba(13, 23, 42, 0.85);
+  --bg-card-hover: rgba(19, 33, 60, 0.9);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --gold: #f59e0b;
+  --gold-light: #fbbf24;
+  --gold-warm: #fef08a;
+  --gold-dark: #b45309;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+
+  --primary: #f59e0b;
+  --primary-hover: #d97706;
+  --primary-soft: rgba(245, 158, 11, 0.15);
+
+  --urgent-bg: rgba(239, 68, 68, 0.15);
+  --urgent-border: rgba(239, 68, 68, 0.4);
+  --urgent-text: #fca5a5;
+
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-border: rgba(16, 185, 129, 0.35);
+  --success-text: #6ee7b7;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-gold: 0 0 30px rgba(245, 158, 11, 0.28);
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.max-w {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================================================
+   PARTE 1: FORMULÁRIO PÚBLICO (index.html)
+======================================================== */
+.public-page {
+  background: radial-gradient(circle at 50% 0%, #10213d 0%, #091224 45%, #040810 100%);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.public-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 30px 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  flex-grow: 1;
+  position: relative;
+  z-index: 10;
+}
+
+/* Top Header Público */
+.public-header {
+  text-align: center;
+  padding: 10px 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo Oficial com Aura Estilosa */
+.logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.logo-glow-aura {
+  position: absolute;
+  width: 170px;
+  height: 220px;
+  border-radius: 30px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(59, 130, 246, 0.25) 55%, transparent 75%);
+  filter: blur(28px);
+  animation: auraPulse 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.logo-glow-aura.small {
+  width: 120px;
+  height: 150px;
+  filter: blur(20px);
+}
+
+@keyframes auraPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+}
+
+.culto-logo {
+  width: 145px;
+  height: auto;
+  aspect-ratio: 3/4;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 158, 11, 0.28);
+  position: relative;
+  z-index: 2;
+  background: #080e1a;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+}
+
+.culto-logo:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: #f59e0b;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 45px rgba(245, 158, 11, 0.45);
+}
+
+/* Badge Oficial */
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--gold-light);
+  padding: 7px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+}
+
+.brand-star {
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+.public-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.public-subtitle {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  font-style: italic;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Versículo Destaque */
+.verse-banner-small {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 16px;
+  padding: 14px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+
+.verse-quote {
+  display: block;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--gold-warm);
+  font-style: italic;
+}
+
+.verse-ref {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* Card Principal do Formulário */
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 26px;
+  padding: 32px 34px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.card-intro {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.intro-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.card-intro-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.card-intro-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.public-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.label-number {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #070d18;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+}
+
+.field-help {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.input-wrap input,
+.input-wrap textarea,
+.field-sub select {
+  width: 100%;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 14, 26, 0.85);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 13px 18px;
+  font-size: 0.96rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.input-wrap input::placeholder,
+.input-wrap textarea::placeholder {
+  color: #64748b;
+}
+
+.input-wrap input:focus,
+.input-wrap textarea:focus,
+.field-sub select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+  background: #091224;
+}
+
+.input-wrap input:disabled {
+  background: rgba(15, 23, 42, 0.5);
+  color: #64748b;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-top: 4px;
+  user-select: none;
+}
+
+/* Bloco de Telefone & Devocional (Campo 1) */
+.phone-devotional-box {
+  margin-top: 10px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s;
+}
+
+.phone-devotional-box:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.phone-input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.badge-optional {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.devotional-checkbox {
+  color: #cbd5e1;
+  font-size: 0.84rem;
+  font-weight: 500;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.devotional-checkbox span {
+  color: #fef08a;
+}
+
+.badge-devotional {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.person-phone-row {
+  margin-top: 4px;
+}
+
+.phone-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-whatsapp-direct {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-whatsapp-direct:hover {
+  background: #22bf5b;
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.form-field-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  align-items: center;
+  background: rgba(7, 14, 26, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+}
+
+.field-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sub-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.urgent-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--urgent-bg);
+  border: 1px solid var(--urgent-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.urgent-toggle-content span {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #f87171;
+}
+
+.urgent-toggle-content small {
+  display: block;
+  font-size: 0.72rem;
+  color: #fca5a5;
+}
+
+/* Card de Convite do Culto Presencial */
+.church-invite-card {
+  background: rgba(10, 18, 34, 0.75);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 20px;
+  padding: 16px 20px;
+  transition: all 0.25s;
+  backdrop-filter: blur(12px);
+}
+
+.church-invite-card:hover {
+  border-color: rgba(245, 158, 11, 0.55);
+  background: rgba(14, 25, 48, 0.85);
+}
+
+.church-invite-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.church-invite-header input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: #f59e0b;
+  cursor: pointer;
+}
+
+.invite-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.invite-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+.invite-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Detalhes de Localização & Google Maps */
+.church-location-box {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+.location-badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 9999px;
+  padding: 3px 12px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.church-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.church-address {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.church-address strong {
+  color: #fbbf24;
+}
+
+.church-welcome-note {
+  font-size: 0.86rem;
+  color: #fef08a;
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(245, 158, 11, 0.3);
+  line-height: 1.45;
+}
+
+.btn-maps-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.92rem;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.btn-maps-link:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
+  color: #ffffff;
+}
+
+.btn-maps-link.small {
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  margin-top: 8px;
+}
+
+.maps-arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.location-buttons-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  align-items: center;
+}
+
+/* Botão Instagram Oficial */
+.btn-instagram-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 12px;
+}
+
+.btn-instagram-pill:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 26px rgba(220, 39, 67, 0.6);
+  filter: brightness(1.1);
+  color: #ffffff;
+}
+
+.btn-instagram-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(220, 39, 67, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.92rem;
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
+  border: 1.5px solid rgba(220, 39, 67, 0.5);
+  transition: all 0.25s;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.btn-instagram-secondary:hover {
+  background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.55);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.btn-instagram-secondary.small {
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  margin-top: 8px;
+}
+
+.insta-icon {
+  flex-shrink: 0;
+}
+
+/* Localização na Confirmação */
+.conf-church-location {
+  background: rgba(10, 18, 34, 0.85);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 20px;
+  padding: 18px 22px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.conf-loc-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.conf-loc-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.conf-loc-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.conf-loc-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fbbf24;
+  margin-bottom: 4px;
+}
+
+.conf-loc-address {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.conf-loc-address strong {
+  color: #ffffff;
+}
+
+/* Badge no Admin */
+.badge-attend {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+
+/* Botão de Envio Estiloso */
+.btn-submit-prayer {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #070d18;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 28px rgba(245, 158, 11, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+.btn-submit-prayer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(245, 158, 11, 0.6);
+  filter: brightness(1.05);
+}
+
+.btn-arrow {
+  font-size: 1.25rem;
+}
+
+.privacy-notice {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: rgba(7, 14, 26, 0.7);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  line-height: 1.45;
+}
+
+/* Tela de Confirmação */
+.confirmation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--success-border);
+  border-radius: 26px;
+  padding: 42px 34px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  backdrop-filter: blur(20px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.conf-icon {
+  font-size: 3.8rem;
+  line-height: 1;
+}
+
+.conf-title {
+  font-family: var(--font-serif);
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.conf-desc {
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+}
+
+.conf-details {
+  background: rgba(7, 14, 26, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  width: 100%;
+  max-width: 520px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.92rem;
+}
+
+.conf-detail-item strong {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+
+.conf-verse {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 22px;
+  max-width: 520px;
+  font-size: 0.92rem;
+  color: var(--gold-warm);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.conf-verse cite {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.84rem;
+  margin-top: 6px;
+  color: var(--gold);
+}
+
+.btn-new-submission {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-new-submission:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.public-footer {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.admin-access-link a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+  transition: color 0.2s;
+}
+
+.admin-access-link a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ========================================================
+   PARTE 2: PAINEL DO ADMINISTRADOR (admin.html)
+======================================================== */
+.admin-page {
+  background: radial-gradient(circle at 50% 0%, #10213d 0%, #070d18 50%, #03060c 100%);
+  min-height: 100vh;
+  color: #f1f5f9;
+}
+
+/* Tela de Login / PIN */
+.login-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 26px;
+  padding: 38px 34px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  backdrop-filter: blur(20px);
+}
+
+.login-logo-wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.admin-login-logo {
+  width: 105px;
+  height: auto;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid rgba(245, 158, 11, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 158, 11, 0.25);
+  position: relative;
+  z-index: 2;
+  background: #080e1a;
+}
+
+.login-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.login-subtitle {
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+.pin-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.pin-input-group label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.pin-input-group input {
+  padding: 14px;
+  font-size: 1.7rem;
+  letter-spacing: 0.35em;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(7, 14, 26, 0.9);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  outline: none;
+  font-family: monospace;
+  transition: all 0.2s;
+}
+
+.pin-input-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+}
+
+.pin-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.login-error {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #f87171;
+  font-weight: 600;
+}
+
+.login-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.btn-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+
+.btn-link:hover {
+  color: var(--gold);
+}
+
+/* Topbar Admin */
+.admin-topbar {
+  background: rgba(10, 18, 34, 0.9);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-brand-logo {
+  width: 46px;
+  height: auto;
+  aspect-ratio: 3/4;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1.5px solid var(--gold);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+  background: #080e1a;
+}
+
+.admin-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.admin-role-badge {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botões Globais */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #070d18;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.btn-secondary {
+  background: rgba(13, 23, 42, 0.8);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: rgba(19, 33, 60, 0.95);
+  border-color: var(--gold);
+}
+
+.btn-subtle {
+  background: transparent;
+  border: none;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.btn-subtle:hover {
+  color: #ffffff;
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 0.82rem;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 14px;
+}
+
+/* Resumo & Estatísticas */
+.admin-summary {
+  margin-top: 24px;
+}
+
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 18px 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  transition: all 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+
+.sum-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.sum-count {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.15;
+  margin: 4px 0;
+}
+
+.sum-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* Barra de Filtros e Busca */
+.admin-filter-bar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.period-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  backdrop-filter: blur(12px);
+}
+
+.filter-label {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.period-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.period-btn:hover {
+  color: #ffffff;
+}
+
+.period-btn.active {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #070d18;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+}
+
+.search-and-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-search-box {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 9px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-search-box input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.92rem;
+  color: #ffffff;
+  font-family: inherit;
+  outline: none;
+}
+
+.status-dropdown {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #ffffff;
+  border-radius: var(--radius-full);
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mural de Pedidos */
+.admin-content {
+  margin-top: 24px;
+  margin-bottom: 60px;
+}
+
+.content-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.content-heading {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.content-counter {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.admin-prayers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Cartão Individual de Oração */
+.admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 22px 26px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(14px);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.admin-card.card-urgent {
+  border-color: var(--urgent-border);
+  border-left: 6px solid #ef4444;
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(13, 23, 42, 0.85) 160px);
+}
+
+.admin-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.header-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold-light);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-prayed {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.badge-answered {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+}
+
+.badge-category {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.badge-urgent-pulse {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  animation: pulse-urgent 2s infinite;
+}
+
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+.admin-card-date {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Linha dos Participantes */
+.admin-people-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: rgba(7, 14, 26, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+}
+
+.person-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.person-row.highlight-target {
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
+}
+
+.person-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+
+.person-value {
+  font-size: 1.05rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Propósito */
+.admin-purpose-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.purpose-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.purpose-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #f1f5f9;
+  white-space: pre-line;
+}
+
+/* Anotações Pastorais */
+.admin-notes-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notes-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.input-card-note {
+  border: 1px solid var(--border-color);
+  background: rgba(7, 14, 26, 0.8);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  font-family: inherit;
+}
+
+.input-card-note:focus {
+  border-color: var(--gold);
+}
+
+/* Ações do Card Admin */
+.admin-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-action-pray {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  color: #070d18;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 9px 18px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-action-pray:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.pray-badge-num {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+}
+
+.btn-action-testimony {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-action-delete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s;
+}
+
+.btn-action-delete:hover {
+  color: #f87171;
+}
+
+/* Modais & Toast */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-card {
+  background: #0d172a;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.btn-close-modal:hover {
+  color: #ffffff;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-body input,
+.modal-body textarea {
+  width: 100%;
+  background: #070d18;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+  border-color: var(--gold);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0b1324;
+  border: 1px solid var(--gold);
+  color: #ffffff;
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(245, 158, 11, 0.3);
+  z-index: 200;
+}
+
+/* ========================================================
+   ESTILOS DE IMPRESSÃO (@media print)
+======================================================== */
+@media print {
+  .admin-topbar,
+  .admin-summary,
+  .admin-filter-bar,
+  .admin-card-actions,
+  .admin-notes-row,
+  .public-footer,
+  .btn,
+  #btn-print-list,
+  .btn-action-delete {
+    display: none !important;
+  }
+
+  body, .admin-page {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .max-w {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .admin-card {
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .person-value, .purpose-text {
+    color: #000000 !important;
+  }
+
+  .content-heading {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 6px;
+    color: #000000 !important;
+  }
+}
+
+/* ====================================================
+   Card de Solicitação de Visita Hospitalar
+   ==================================================== */
+.hospital-visit-card {
+  background: rgba(8, 20, 36, 0.85);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: 22px;
+  padding: 18px 22px;
+  transition: all 0.28s ease;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hospital-visit-card:hover {
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 14px 38px rgba(14, 165, 233, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: rgba(12, 28, 50, 0.95);
+}
+
+.hospital-visit-card.active-open {
+  border-color: #38bdf8;
+  background: rgba(10, 24, 44, 0.96);
+  box-shadow: 0 16px 42px rgba(14, 165, 233, 0.28);
+}
+
+.hospital-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Ícone com Desenho de Hospital e Subtítulo Pequeno Embaixo */
+.hospital-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 104px;
+  text-align: center;
+  padding: 8px 6px;
+  background: rgba(15, 30, 52, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.hospital-svg-icon {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 4px 8px rgba(56, 189, 248, 0.4));
+  transition: transform 0.25s ease;
+}
+
+.hospital-visit-card:hover .hospital-svg-icon {
+  transform: scale(1.08);
+}
+
+.hospital-sub-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #7dd3fc;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin-top: 5px;
+}
+
+.hospital-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.hospital-header-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hospital-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.badge-capelania {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+}
+
+.hospital-desc {
+  font-size: 0.83rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.hospital-checkbox-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hospital-checkbox-wrap input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #0284c7;
+}
+
+.toggle-hint-pill {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+/* Detalhes do Formulário de Visita Hospitalar */
+.hospital-visit-form-details {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.hospital-info-banner {
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #e0f2fe;
+  line-height: 1.45;
+}
+
+.hospital-info-banner strong {
+  color: #38bdf8;
+}
+
+.hospital-grid-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.hosp-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hosp-field-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.hosp-field-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7dd3fc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hosp-field-label .req {
+  color: #ef4444;
+}
+
+.hosp-input,
+.hosp-select,
+.hosp-textarea {
+  width: 100%;
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  background: rgba(5, 12, 24, 0.9);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s;
+}
+
+.hosp-input:focus,
+.hosp-select:focus,
+.hosp-textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+  background: #091a30;
+}
+
+.hosp-privacy-tag {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Badge no Painel Admin */
+.badge-hospital {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+}
+
+.admin-hospital-alert-box {
+  background: rgba(14, 165, 233, 0.08);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hosp-alert-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hosp-alert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.hosp-alert-item strong {
+  color: #ffffff;
+}
+
+.hosp-alert-buttons-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.btn-whatsapp-hosp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #25d366;
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 5px 13px;
+  border-radius: 9999px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-whatsapp-hosp:hover {
+  background: #22bf5b;
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.btn-whatsapp-hosp-alt {
+  background: #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+.btn-whatsapp-hosp-alt:hover {
+  background: #0369a1;
+}
+
+/* ====================================================
+   Área de Impressão e PDF de Visitas Hospitalares
+   ==================================================== */
+.btn-print-hosp-top {
+  background: rgba(14, 165, 233, 0.16) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.5) !important;
+  color: #38bdf8 !important;
+  font-weight: 800 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 10px rgba(14, 165, 233, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-print-hosp-top:hover {
+  background: rgba(14, 165, 233, 0.32) !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.45);
+}
+
+.modal-large {
+  max-width: 900px !important;
+  width: 95% !important;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-subtext {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.hosp-print-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hosp-print-filter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.hosp-select-filter {
+  background: #070d18;
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.hosp-select-filter:focus {
+  border-color: #38bdf8;
+}
+
+.hosp-print-count-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.hosp-print-preview-scroll {
+  overflow-y: auto;
+  max-height: 52vh;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #0f172a;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.hosp-doc-wrapper {
+  color: #0f172a;
+  font-family: inherit;
+}
+
+.hosp-doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.hosp-doc-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hosp-doc-logo {
+  width: 48px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.hosp-doc-church {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0284c7;
+  letter-spacing: 0.04em;
+}
+
+.hosp-doc-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 2px 0;
+}
+
+.hosp-doc-sub {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.hosp-doc-meta {
+  text-align: right;
+  font-size: 0.78rem;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.hosp-doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 16px;
+}
+
+.hosp-doc-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  font-weight: 800;
+  padding: 8px 6px;
+  border: 1px solid #cbd5e1;
+  text-align: left;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.hosp-doc-table td {
+  padding: 8px 6px;
+  border: 1px solid #e2e8f0;
+  vertical-align: top;
+  color: #1e293b;
+}
+
+.hosp-doc-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.pdf-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.tag-pending {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.tag-prayed {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.tag-answered {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.pdf-room-pill {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid #bae6fd;
+  display: inline-block;
+  font-size: 0.78rem;
+}
+
+.pdf-sub-obs {
+  font-size: 0.74rem;
+  color: #334155;
+  margin-top: 3px;
+}
+
+.pdf-sub-pastor {
+  font-size: 0.74rem;
+  color: #15803d;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.hosp-doc-footer-signatures {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 12px;
+}
+
+.hosp-sig-box {
+  width: 250px;
+  text-align: center;
+}
+
+.hosp-sig-line {
+  border-bottom: 1.2px solid #334155;
+  margin-bottom: 6px;
+}
+
+.hosp-sig-title {
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: #0f172a;
+}
+
+.hosp-sig-desc {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.modal-actions-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-print-hosp-action {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  border: 1px solid #38bdf8 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+}
+
+.btn-print-hosp-action:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+/* ========================================================
+   SISTEMA DE RESPONSIVIDADE COMPLETO (DESKTOP & CELULAR)
+   Otimizado para Computadores, Tablets e Smartphones
+   ======================================================== */
+
+/* Melhorias Globais de Toque e Ergonomia Móvel */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Feedback Tátil Imediato em Telas Touch */
+button:active, 
+.btn:active, 
+.period-btn:active, 
+.btn-maps-link:active, 
+.btn-instagram-pill:active,
+.btn-action-pray:active,
+.btn-action-testimony:active,
+.btn-whatsapp-hosp:active {
+  transform: scale(0.97) !important;
+}
+
+/* Suporte a Entalhes / Safe-Area de Smartphones Modernos (iPhone / Android) */
+.public-page {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+.public-container {
+  padding-bottom: max(50px, env(safe-area-inset-bottom, 50px));
+}
+
+.admin-dashboard {
+  padding-bottom: max(60px, env(safe-area-inset-bottom, 60px));
+}
+
+/* ----------------------------------------------------
+   1. TABLETS E TELAS MÉDIAS (641px até 1024px)
+   ---------------------------------------------------- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .public-container {
+    max-width: 660px;
+    padding: 24px 20px 50px;
+  }
+
+  .summary-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .admin-topbar-inner {
+    padding: 12px 20px;
+  }
+
+  .admin-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+}
+
+/* ----------------------------------------------------
+   2. SMARTPHONES E TELAS PEQUENAS (<= 640px)
+   ---------------------------------------------------- */
+@media (max-width: 640px) {
+
+  /* --- Prevenção de Auto-Zoom no iOS Safari / Chrome Mobile --- */
+  input[type="text"],
+  input[type="tel"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Obrigatório para iPhone não dar zoom automático */
+  }
+
+  /* --- FORMULÁRIO PÚBLICO (index.html no Celular) --- */
+  .public-container {
+    padding: 16px 12px 40px;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* Logo Proporcional ao Celular */
+  .logo-wrapper {
+    margin-bottom: 14px;
+  }
+
+  .culto-logo {
+    width: 112px;
+    height: 112px;
+  }
+
+  .logo-glow-aura {
+    width: 120px;
+    height: 120px;
+  }
+
+  .brand-badge {
+    font-size: 0.72rem;
+    padding: 6px 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .btn-instagram-pill {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
+
+  .public-title {
+    font-size: 1.65rem;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .public-subtitle {
+    font-size: 0.86rem;
+    padding: 0 6px;
+  }
+
+  .verse-banner-small {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .verse-quote {
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+
+  .verse-ref {
+    font-size: 0.78rem;
+  }
+
+  /* Caixa de Horários e Endereço no Celular */
+  .meeting-info-box {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .meeting-header {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .meeting-badge-pulse {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .meeting-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .location-buttons-row {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-maps-link {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 14px;
+    font-size: 0.86rem;
+    min-height: 44px;
+  }
+
+  /* Cartão do Formulário no Celular */
+  .form-card {
+    padding: 20px 14px;
+    border-radius: 20px;
+  }
+
+  .card-intro {
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .intro-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .intro-title {
+    font-size: 1.05rem;
+  }
+
+  .intro-sub {
+    font-size: 0.78rem;
+  }
+
+  /* Campos em Linha Única no Celular */
+  .form-field-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-label {
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .form-textarea {
+    min-height: 110px;
+  }
+
+  /* Opção de Devocional WhatsApp */
+  .devotional-option-box {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .checkbox-label {
+    font-size: 0.82rem;
+    gap: 10px;
+  }
+
+  /* Card Especial de Visita Hospitalar no Celular */
+  .hospital-visit-card {
+    padding: 14px 12px;
+    border-radius: 18px;
+  }
+
+  .hospital-card-header {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .hospital-icon-wrapper {
+    width: 58px;
+    min-width: 58px;
+    padding: 6px 4px;
+    border-radius: 12px;
+  }
+
+  .hospital-svg-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hospital-sub-label {
+    font-size: 0.54rem;
+    letter-spacing: 0.02em;
+    margin-top: 3px;
+  }
+
+  .hospital-header-text {
+    min-width: 0;
+  }
+
+  .hospital-header-top {
+    gap: 6px;
+  }
+
+  .hospital-badge-top {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+  }
+
+  .hospital-title {
+    font-size: 0.94rem;
+    line-height: 1.25;
+  }
+
+  .hospital-subtitle {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .hospital-grid-fields {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  /* Cartão de Urgência */
+  .urgency-toggle-card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .urgency-title {
+    font-size: 0.86rem;
+  }
+
+  .urgency-desc {
+    font-size: 0.76rem;
+  }
+
+  /* Botão Principal de Envio */
+  .btn-submit-prayer {
+    padding: 15px;
+    font-size: 1.02rem;
+    min-height: 52px;
+    border-radius: 9999px;
+  }
+
+  /* Modal de Sucesso Público */
+  .modal-success-content {
+    width: 94vw;
+    max-width: 94vw;
+    padding: 26px 18px;
+    border-radius: 20px;
+  }
+
+  .success-icon-badge {
+    width: 58px;
+    height: 58px;
+    font-size: 1.8rem;
+  }
+
+  .modal-success-title {
+    font-size: 1.3rem;
+  }
+
+  .modal-success-desc {
+    font-size: 0.86rem;
+  }
+
+  .conf-detail-box {
+    padding: 14px;
+    font-size: 0.84rem;
+  }
+
+  /* --- PAINEL DO ADMINISTRADOR (admin.html no Celular) --- */
+  
+  /* Tela de Login Admin no Celular */
+  .login-overlay {
+    padding: 14px;
+  }
+
+  .login-card {
+    padding: 26px 16px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+  }
+
+  .admin-login-logo {
+    width: 84px;
+  }
+
+  .login-title {
+    font-size: 1.3rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+  }
+
+  .pin-input-group input {
+    font-size: 1.5rem !important;
+    letter-spacing: 0.28em;
+    padding: 12px;
+  }
+
+  /* Topbar Admin Responsiva (Marca no topo + Grid 2x2 para botões) */
+  .admin-topbar-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .admin-brand {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .admin-brand-logo {
+    width: 38px;
+  }
+
+  .admin-title {
+    font-size: 1.1rem;
+  }
+
+  .admin-role-badge {
+    font-size: 0.68rem;
+  }
+
+  /* Os 4 botões do painel organizados em grade 2x2 no celular */
+  .admin-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .admin-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 0.76rem;
+    min-height: 42px;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
+    border-radius: 10px;
+  }
+
+  .admin-actions .btn span:last-child {
+    font-size: 0.74rem;
+  }
+
+  /* Resumo e Estatísticas no Celular */
+  .summary-cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .summary-card {
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .sum-label {
+    font-size: 0.74rem;
+  }
+
+  .sum-count {
+    font-size: 1.75rem;
+    margin: 2px 0;
+  }
+
+  .sum-sub {
+    font-size: 0.68rem;
+  }
+
+  /* Abas de Período e Filtros com Rolagem Tátil */
+  .admin-filter-bar {
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .period-tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 6px 8px;
+    width: 100%;
+    border-radius: 14px;
+    gap: 6px;
+  }
+
+  .period-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-label {
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+
+  .period-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .search-and-status {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .admin-search-box {
+    width: 100%;
+    padding: 9px 14px;
+    border-radius: 12px;
+  }
+
+  .status-dropdown {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  /* Conteúdo e Cards de Oração no Celular */
+  .content-header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .content-heading {
+    font-size: 1.15rem;
+  }
+
+  .content-counter {
+    font-size: 0.76rem;
+  }
+
+  .admin-card {
+    padding: 16px 14px;
+    border-radius: 18px;
+    gap: 12px;
+  }
+
+  .admin-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .header-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .admin-card-date {
+    font-size: 0.75rem;
+    align-self: flex-start;
+  }
+
+  /* Participantes em 1 Coluna no Celular */
+  .admin-people-box {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .person-row.highlight-target {
+    border-left: 2px solid var(--gold);
+    padding-left: 10px;
+  }
+
+  .person-label {
+    font-size: 0.7rem;
+  }
+
+  .person-value {
+    font-size: 0.98rem;
+    word-break: break-word;
+  }
+
+  /* Alerta Hospitalar no Card do Celular */
+  .hosp-alert-box {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .hosp-alert-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .btn-whatsapp-hosp {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 14px;
+    font-size: 0.82rem;
+    min-height: 42px;
+    margin-top: 6px;
+  }
+
+  .purpose-text {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .input-card-note {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  /* Ações do Card no Celular */
+  .admin-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-top: 12px;
+  }
+
+  .action-buttons-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .btn-action-pray {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    min-height: 44px;
+  }
+
+  .btn-action-testimony {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .btn-action-delete {
+    align-self: center;
+    padding: 8px;
+    font-size: 0.95rem;
+    color: #f87171;
+    border: 1px dashed rgba(248, 113, 113, 0.3);
+    border-radius: 8px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* Modais no Celular (Imprimir Orações, Visitas Hospitalares, Ajustes) */
+  .modal-overlay {
+    padding: 8px;
+    align-items: flex-end;
+  }
+
+  .modal-card,
+  .modal-large {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 94vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    margin: 0 !important;
+  }
+
+  .modal-header {
+    padding: 14px 16px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    padding: 14px 16px;
+    overflow-y: auto;
+    max-height: calc(94vh - 120px);
+  }
+
+  .hosp-print-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .hosp-print-filter-wrap {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .hosp-select-filter {
+    flex: 1;
+  }
+
+  /* Tabela de Visitas com Rolagem Horizontal Suave para não cortar colunas */
+  .hosp-print-preview-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .hosp-print-preview-scroll table {
+    min-width: 620px;
+  }
+
+  .modal-actions-between {
+    flex-direction: column-reverse;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+
+  .modal-actions-between button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-print-hosp-action {
+    min-height: 46px;
+    font-size: 0.92rem !important;
+  }
+}
+
+/* ----------------------------------------------------
+   3. SMARTPHONES ULTRA-PEQUENOS (<= 380px)
+   ---------------------------------------------------- */
+@media (max-width: 380px) {
+  .public-container {
+    padding: 12px 8px 30px;
+  }
+
+  .form-card {
+    padding: 16px 10px;
+  }
+
+  .admin-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons-group {
+    grid-template-columns: 1fr;
+  }
+}
+

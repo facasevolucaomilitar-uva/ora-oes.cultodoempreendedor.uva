@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#060b14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Culto do Empreendedor">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>Deixe seu Pedido de Oração - Culto do Empreendedor União da Vitória PR</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="public-page">
+  <div class="public-container">
+    
+    <!-- Top Header Público com Logo Oficial Estilosa -->
+    <header class="public-header">
+      <div class="logo-wrapper">
+        <div class="logo-glow-aura"></div>
+        <img src="logo.svg" 
+             alt="Culto do Empreendedor - União da Vitória PR" 
+             class="culto-logo">
+      </div>
+      <div class="brand-badge">
+        <span class="brand-star">✦</span>
+        <span class="brand-text">Culto do Empreendedor • União da Vitória - PR</span>
+        <span class="brand-star">✦</span>
+      </div>
+
+      <!-- Botão Instagram Oficial -->
+      <a href="https://www.instagram.com/cultodoempreendedoruva/" 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn-instagram-pill"
+         title="Acompanhe o Culto do Empreendedor no Instagram @cultodoempreendedoruva">
+        <svg class="insta-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <span>@cultodoempreendedoruva</span>
+        <span class="insta-arrow">↗</span>
+      </a>
+
+      <h1 class="public-title">Mural de Oração & Propósito</h1>
+      <p class="public-subtitle">
+        "Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos." (Provérbios 16:3)
+      </p>
+    </header>
+
+    <!-- Card Principal do Formulário -->
+    <main class="form-card" id="form-card-container">
+      <div class="card-intro">
+        <div class="intro-icon">🙏</div>
+        <div>
+          <h2 class="card-intro-title">Apresente sua causa</h2>
+          <p class="card-intro-desc">Seu pedido será recebido com muito amor e colocado em oração e jejum.</p>
+        </div>
+      </div>
+
+      <form id="prayer-public-form" class="public-form">
+        
+        <!-- CAMPO 1: Nome de quem está enviando + Telefone (Opcional) -->
+        <div class="form-field">
+          <label for="sender-name" class="field-label">
+            <span class="label-number">1</span>
+            <span>Seu Nome</span>
+          </label>
+          <div class="input-wrap">
+            <input type="text" id="sender-name" placeholder="Ex: Maria Aparecida, Lucas Silva..." autocomplete="name">
+          </div>
+
+          <!-- Opção de Telefone para receber Devocional (Opcional) -->
+          <div class="phone-devotional-box" id="box-phone-devotional">
+            <div class="phone-input-header">
+              <label for="sender-phone" class="phone-label">
+                <span>📱 Telefone / WhatsApp</span>
+                <span class="badge-optional">Opcional</span>
+              </label>
+            </div>
+            <div class="input-wrap">
+              <input type="tel" id="sender-phone" placeholder="Ex: (42) 99999-9999" autocomplete="tel">
+            </div>
+            <label class="checkbox-inline devotional-checkbox">
+              <input type="checkbox" id="check-want-devotional" checked>
+              <span>✨ Desejo receber um devocional no meu WhatsApp</span>
+            </label>
+          </div>
+
+          <label class="checkbox-inline">
+            <input type="checkbox" id="check-anon-sender">
+            <span>Prefiro não me identificar (Enviar como Anônimo)</span>
+          </label>
+        </div>
+
+        <!-- CAMPO 2: Para quem é a oração -->
+        <div class="form-field">
+          <label for="target-person" class="field-label">
+            <span class="label-number">2</span>
+            <span>Para quem é esta oração?</span>
+          </label>
+          <p class="field-help">Indique por quem devemos orar (ex: "Minha mãe Helena", "Meu filho", "Por mim mesmo" ou mantenha anônimo).</p>
+          <div class="input-wrap">
+            <input type="text" id="target-person" placeholder="Ex: Por mim mesmo, Por minha mãe Helena, Pelo meu casamento...">
+          </div>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="check-anon-target">
+            <span>Deixar a pessoa em segredo / Anônima</span>
+          </label>
+        </div>
+
+        <!-- CAMPO 3: A Oração ou Propósito -->
+        <div class="form-field">
+          <label for="prayer-purpose" class="field-label">
+            <span class="label-number">3</span>
+            <span>Qual é a oração ou propósito no seu coração?</span>
+          </label>
+          <p class="field-help">Escreva com o coração aberto. Seja para cura de saúde, paz na família, porta de emprego ou consolo.</p>
+          <div class="input-wrap">
+            <textarea id="prayer-purpose" rows="4" placeholder="Descreva aqui o motivo da oração ou o propósito que você deseja colocar diante de Deus..."></textarea>
+          </div>
+        </div>
+
+        <!-- Categoria e Opção de Urgência -->
+        <div class="form-field form-field-row">
+          <div class="field-sub">
+            <label for="prayer-category" class="sub-label">Motivo principal:</label>
+            <select id="prayer-category">
+              <option value="Negócios">💼 Negócios & Empresas</option>
+              <option value="Vendas & Clientes">📈 Vendas & Novos Clientes</option>
+              <option value="Trabalho">🏢 Emprego & Carreira</option>
+              <option value="Finanças">💰 Provisão & Finanças</option>
+              <option value="Família">🏡 Família & Casamento</option>
+              <option value="Saúde">🩺 Saúde & Cura</option>
+              <option value="Espiritual">🕊️ Sabedoria & Vida Espiritual</option>
+              <option value="Gratidão">🙌 Gratidão por Conquistas</option>
+              <option value="Outros">✨ Outro Motivo</option>
+            </select>
+          </div>
+
+          <label class="urgent-toggle">
+            <input type="checkbox" id="check-urgent-prayer">
+            <div class="urgent-toggle-content">
+              <span>🚨 Motivo Urgente</span>
+              <small>Cirurgia, UTI ou situação imediata</small>
+            </div>
+          </label>
+        </div>
+
+        <!-- OPÇÃO: Deseja participar do Culto Presencialmente? -->
+        <div class="church-invite-card">
+          <label class="church-invite-header" for="check-attend-service">
+            <input type="checkbox" id="check-attend-service">
+            <div class="invite-header-text">
+              <span class="invite-title">🏛️ Desejo participar do Culto presencialmente</span>
+              <span class="invite-desc">Marque para ver o endereço e traçar a rota no Google Maps</span>
+            </div>
+          </label>
+
+          <!-- Detalhes do Local e Link do Google Maps -->
+          <div id="church-location-details" class="church-location-box hidden">
+            <div class="location-badge">📍 Onde nos encontrar</div>
+            <h4 class="church-name">Igreja Assembleia de Deus • Templo Sede</h4>
+            <p class="church-address">
+              <strong>Rua Ipiranga, 357</strong> — Centro<br>
+              União da Vitória - PR
+            </p>
+            <p class="church-welcome-note">
+              ✨ <em>Você e sua família são nossos convidados especiais! Venha receber uma oração presencial e uma palavra de vitória para a sua vida e seus negócios.</em>
+            </p>
+            
+            <div class="location-buttons-row">
+              <a href="https://maps.google.com/?q=Rua+Ipiranga,+357+-+Centro,+União+da+Vitória+-+PR" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn-maps-link" 
+                 title="Abrir no aplicativo Google Maps">
+                <span>📍 Abrir no Google Maps</span>
+                <span class="maps-arrow">↗</span>
+              </a>
+
+              <a href="https://www.instagram.com/cultodoempreendedoruva/" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn-instagram-secondary" 
+                 title="Seguir @cultodoempreendedoruva no Instagram">
+                <svg class="insta-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                <span>@cultodoempreendedoruva</span>
+                <span class="maps-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPÇÃO ESPECIAL: Visita Presencial em Hospitais -->
+        <div class="hospital-visit-card" id="hospital-visit-card">
+          <label class="hospital-card-header" for="check-hospital-visit">
+            <!-- Ícone com Desenho de Hospital e Texto Pequeno Embaixo -->
+            <div class="hospital-icon-wrapper">
+              <svg class="hospital-svg-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Prédio Hospitalar -->
+                <rect x="8" y="18" width="48" height="42" rx="7" fill="url(#hospGrad)" stroke="#38bdf8" stroke-width="2.2"/>
+                <path d="M22 18V9C22 7.89543 22.8954 7 24 7H40C41.1046 7 42 7.89543 42 9V18" stroke="#38bdf8" stroke-width="2.2" fill="#0b1728"/>
+                <!-- Cruz Médica Branca/Vermelha de Hospital -->
+                <rect x="29" y="24" width="6" height="18" rx="1.5" fill="#ef4444"/>
+                <rect x="23" y="30" width="18" height="6" rx="1.5" fill="#ef4444"/>
+                <rect x="30" y="25" width="4" height="16" rx="1" fill="#ffffff"/>
+                <rect x="24" y="31" width="16" height="4" rx="1" fill="#ffffff"/>
+                <!-- Janelas do Hospital -->
+                <rect x="15" y="26" width="6" height="6" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+                <rect x="43" y="26" width="6" height="6" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+                <rect x="15" y="38" width="6" height="6" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+                <rect x="43" y="38" width="6" height="6" rx="1.5" fill="#38bdf8" opacity="0.8"/>
+                <!-- Porta do Hospital -->
+                <path d="M28 60V48C28 46.8954 28.8954 46 30 46H34C35.1046 46 36 46.8954 36 48V60" fill="#f59e0b" opacity="0.9"/>
+                <defs>
+                  <linearGradient id="hospGrad" x1="8" y1="18" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#0f2642"/>
+                    <stop offset="1" stop-color="#071220"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span class="hospital-sub-label">visita presencial hospitais</span>
+            </div>
+
+            <div class="hospital-header-text">
+              <div class="hospital-header-top">
+                <span class="hospital-title">Visita Presencial em Hospitais</span>
+                <span class="badge-capelania">Capelania Pastoral</span>
+              </div>
+              <p class="hospital-desc">
+                Este campo é destinado a solicitar a visita presencial de um pastor ou intercessor no leito de hospitais para orar, confortar e ministrar unção com óleo aos enfermos internados.
+              </p>
+            </div>
+
+            <div class="hospital-checkbox-wrap">
+              <input type="checkbox" id="check-hospital-visit">
+              <span class="toggle-hint-pill">Solicitar</span>
+            </div>
+          </label>
+
+          <!-- Formulário Expansível com as Perguntas da Visita -->
+          <div id="hospital-visit-form-details" class="hospital-visit-form-details hidden">
+            <div class="hospital-info-banner">
+              <strong>🕊️ Assistência Espiritual no Leito (Capelania):</strong><br>
+              Nossa equipe pastoral realiza visitas hospitalares para orar pelo paciente e abençoar a família.
+              <div style="margin-top: 8px; padding: 8px 12px; background: rgba(56, 189, 248, 0.15); border-radius: 10px; border-left: 3px solid #38bdf8; font-size: 0.83rem; color: #e0f2fe; line-height: 1.4;">
+                ✨ <strong>Facilidade:</strong> Ao solicitar a visita hospitalar aqui embaixo, <u>não é necessário preencher o cadastro de cima</u>. Cuidaremos de tudo com base nos dados informados neste campo!
+              </div>
+            </div>
+
+            <div class="hospital-grid-fields">
+              
+              <!-- Pergunta 1: Desejo visita -->
+              <div class="hosp-field-group full-width">
+                <label class="checkbox-inline" style="color: #7dd3fc; font-weight: 700;">
+                  <input type="checkbox" id="hosp-confirm-desejo" checked>
+                  <span>Desejo e solicito visita pastoral no leito do hospital</span>
+                </label>
+              </div>
+
+              <!-- Pergunta 2: Nome do Paciente -->
+              <div class="hosp-field-group">
+                <label for="hosp-patient-name" class="hosp-field-label">
+                  <span>Nome do Paciente / Enfermo:</span>
+                  <span class="req">*</span>
+                </label>
+                <input type="text" id="hosp-patient-name" class="hosp-input" placeholder="Ex: José Carlos de Oliveira">
+              </div>
+
+              <!-- Pergunta 3: Nome do Hospital -->
+              <div class="hosp-field-group">
+                <label for="hosp-select-hospital" class="hosp-field-label">
+                  <span>Nome do Hospital:</span>
+                  <span class="req">*</span>
+                </label>
+                <select id="hosp-select-hospital" class="hosp-select">
+                  <option value="">Selecione o hospital...</option>
+                  <option value="Hospital APMI (União da Vitória)">Hospital APMI — União da Vitória (PR)</option>
+                  <option value="Hospital Regional São Camilo (União da Vitória)">Hospital Regional São Camilo — União da Vitória (PR)</option>
+                  <option value="Hospital de Caridade São Braz (Porto União)">Hospital de Caridade São Braz — Porto União (SC)</option>
+                  <option value="Outro Hospital / Casa de Repouso">Outro Hospital / Clínica (especificar abaixo)</option>
+                </select>
+                <input type="text" id="hosp-custom-hospital" class="hosp-input hidden" placeholder="Digite o nome do hospital ou clínica..." style="margin-top: 6px;">
+              </div>
+
+              <!-- Pergunta: Número do Quarto / Leito / Ala -->
+              <div class="hosp-field-group">
+                <label for="hosp-room-number" class="hosp-field-label">
+                  <span>Número do Quarto / Leito / Ala:</span>
+                  <span class="req">*</span>
+                </label>
+                <input type="text" id="hosp-room-number" class="hosp-input" placeholder="Ex: Quarto 204, Leito 3 (Ala Clínica)">
+              </div>
+
+              <!-- Pergunta: Contato do Acompanhante / Familiar (Opcional) -->
+              <div class="hosp-field-group">
+                <label for="hosp-contact-phone" class="hosp-field-label">
+                  <span>Telefone / WhatsApp do Acompanhante:</span>
+                  <span class="badge-optional">Opcional</span>
+                </label>
+                <input type="tel" id="hosp-contact-phone" class="hosp-input" placeholder="Ex: (42) 99999-9999">
+              </div>
+
+              <!-- Pergunta: OBSERVAÇÃO -->
+              <div class="hosp-field-group full-width">
+                <label for="hosp-visit-notes" class="hosp-field-label">
+                  <span>OBSERVAÇÃO:</span>
+                  <span class="badge-optional">Opcional</span>
+                </label>
+                <input type="text" id="hosp-visit-notes" class="hosp-input" placeholder="Ex: Observações gerais, detalhes sobre o paciente, horários preferenciais...">
+                <span class="hosp-privacy-tag">
+                  🔒 Informações mantidas em absoluto sigilo pastoral e utilizadas exclusivamente para agendar a visita.
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão de Envio -->
+        <button type="submit" class="btn-submit-prayer" id="btn-submit-prayer">
+          <span>Enviar Pedido de Oração</span>
+          <span class="btn-arrow">🙏</span>
+        </button>
+
+        <p class="privacy-notice">
+          🔒 <strong>Sua privacidade é sagrada:</strong> Somente o intercessor/administrador receberá seu pedido. Nenhuma outra pessoa verá o que você escreveu.
+        </p>
+      </form>
+    </main>
+
+    <!-- Tela de Agradecimento e Confirmação (Exibida após envio) -->
+    <div class="confirmation-card hidden" id="confirmation-container">
+      <div class="conf-icon">🕊️✨</div>
+      <h2 class="conf-title">Seu pedido foi recebido com amor!</h2>
+      <p class="conf-desc">
+        Apresentamos a sua causa diante de Deus. Fique em paz e creia que o Senhor está cuidando de tudo no tempo perfeito.
+      </p>
+
+      <div class="conf-details">
+        <div class="conf-detail-item">
+          <strong>Quem pediu:</strong>
+          <span id="conf-sender-name">—</span>
+        </div>
+        <div class="conf-detail-item hidden" id="conf-phone-row">
+          <strong>WhatsApp / Devocional:</strong>
+          <span id="conf-sender-phone">—</span>
+        </div>
+        <div class="conf-detail-item">
+          <strong>Intercedendo por:</strong>
+          <span id="conf-target-person">—</span>
+        </div>
+        <div class="conf-detail-item">
+          <strong>Propósito:</strong>
+          <span id="conf-purpose">—</span>
+        </div>
+      </div>
+
+      <div class="conf-verse">
+        <em>"O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti e tenha misericórdia de ti; o Senhor sobre ti levante o seu rosto e te dê a paz."</em>
+        <cite>— Números 6:24-26</cite>
+      </div>
+
+      <!-- Convite Presencial e Mapa na Confirmação -->
+      <div class="conf-church-location">
+        <div class="conf-loc-icon">🏛️</div>
+        <div class="conf-loc-content">
+          <h4 class="conf-loc-title">Venha Orar Conosco Presencialmente!</h4>
+          <p class="conf-loc-address">
+            <strong>Igreja Assembleia de Deus • Templo Sede</strong><br>
+            Rua Ipiranga, 357 — Centro, União da Vitória - PR
+          </p>
+          <div class="conf-loc-buttons">
+            <a href="https://maps.google.com/?q=Rua+Ipiranga,+357+-+Centro,+União+da+Vitória+-+PR" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-maps-link small"
+               title="Abrir no Google Maps">
+              <span>📍 Google Maps</span>
+              <span class="maps-arrow">↗</span>
+            </a>
+            <a href="https://www.instagram.com/cultodoempreendedoruva/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-instagram-secondary small"
+               title="Seguir @cultodoempreendedoruva no Instagram">
+              <span>📸 @cultodoempreendedoruva</span>
+              <span class="maps-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      <!-- Alerta de Confirmação da Visita Hospitalar -->
+      <div id="conf-hosp-box" class="conf-church-location hidden" style="border-color: rgba(56, 189, 248, 0.5); background: rgba(8, 24, 44, 0.8);">
+        <div class="conf-loc-icon">🏥</div>
+        <div class="conf-loc-content">
+          <h4 class="conf-loc-title" style="color: #38bdf8;">Solicitação de Visita Hospitalar Registrada!</h4>
+          <p class="conf-loc-address" style="color: #cbd5e1;">
+            Nossa equipe de assistência pastoral e capelania entrará em contato com o acompanhante para confirmar os horários de visitação no hospital.
+          </p>
+          <div style="font-size: 0.82rem; color: #7dd3fc; margin-top: 6px; padding: 8px 12px; background: rgba(56, 189, 248, 0.1); border-radius: 8px; border: 1px dashed rgba(56, 189, 248, 0.3);">
+            <span id="conf-hosp-summary">—</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-new-submission" id="btn-new-submission">
+        Enviar Outro Pedido de Oração
+      </button>
+    </div>
+
+    <!-- Footer com Link Discreto para o Administrador -->
+    <footer class="public-footer">
+      <p>Círculo de Intercessão • Todos os direitos reservados</p>
+      <div class="admin-access-link">
+        <a href="admin.html" title="Acesso restrito ao Administrador">
+          🔒 Acesso do Administrador / Painel
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="pedir.js"></script>
+</body>
+</html>
