@@ -2305,6 +2305,135 @@ body {
 }
 
 /* ========================================================
+   Selos de Obrigatoriedade e Animação de Erro nos Campos
+   ======================================================== */
+.badge-mandatory {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.16);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-error-pulse {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.35) !important;
+  animation: shakeInput 0.45s ease-in-out !important;
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* Atalho para o Admin na Tela de Confirmação */
+.conf-admin-shortcut {
+  margin-top: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-conf-admin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.88rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.btn-conf-admin:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: #fbbf24;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+}
+
+/* ========================================================
+   Botão Flutuante Fixo do Administrador (Canto Inferior Direito)
+   Sempre visível em qualquer ponto de rolagem da tela
+   ======================================================== */
+.btn-floating-admin {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(13, 23, 42, 0.96) 0%, rgba(6, 11, 20, 0.98) 100%);
+  border: 1.5px solid rgba(245, 158, 11, 0.55);
+  color: #fbbf24;
+  padding: 12px 22px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(245, 158, 11, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.btn-floating-admin:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: #fbbf24;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(23, 38, 68, 0.98) 0%, rgba(10, 18, 34, 1) 100%);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85), 0 0 30px rgba(245, 158, 11, 0.45);
+}
+
+.btn-floating-admin:active {
+  transform: scale(0.96) !important;
+}
+
+.floating-admin-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: floatingPulse 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes floatingPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.5; }
+}
+
+.floating-admin-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.floating-admin-text {
+  font-size: 0.88rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* ========================================================
    SISTEMA DE RESPONSIVIDADE COMPLETO (DESKTOP & CELULAR)
    Otimizado para Computadores, Tablets e Smartphones
    ======================================================== */
@@ -2388,9 +2517,27 @@ button:active,
 
   /* --- FORMULÁRIO PÚBLICO (index.html no Celular) --- */
   .public-container {
-    padding: 16px 12px 40px;
+    padding: 16px 12px max(85px, env(safe-area-inset-bottom, 85px));
     gap: 16px;
     width: 100%;
+  }
+
+  /* Botão Flutuante do Admin no Celular */
+  .btn-floating-admin {
+    bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    right: 14px;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    gap: 7px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  }
+
+  .floating-admin-icon {
+    font-size: 1rem;
+  }
+
+  .floating-admin-text {
+    font-size: 0.8rem;
   }
 
   /* Logo Proporcional ao Celular */

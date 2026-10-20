@@ -125,44 +125,47 @@ const confPhone = document.getElementById('conf-sender-phone');
 const confTarget = document.getElementById('conf-target-person');
 const confPurpose = document.getElementById('conf-purpose');
 
-// Alternância de Anônimo: Quem envia
-checkAnonSender.addEventListener('change', (e) => {
-  if (e.target.checked) {
-    senderInput.value = '';
-    senderInput.disabled = true;
-    senderInput.placeholder = 'Seu nome não será exibido (Enviado em segredo)';
-    if (boxPhoneDevotional) {
-      boxPhoneDevotional.style.opacity = '0.45';
-      boxPhoneDevotional.style.pointerEvents = 'none';
+// Alternância de Anônimo (se existirem na tela)
+if (checkAnonSender) {
+  checkAnonSender.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      senderInput.value = '';
+      senderInput.disabled = true;
+      senderInput.placeholder = 'Seu nome não será exibido';
+      if (boxPhoneDevotional) {
+        boxPhoneDevotional.style.opacity = '0.45';
+        boxPhoneDevotional.style.pointerEvents = 'none';
+      }
+      if (senderPhoneInput) {
+        senderPhoneInput.disabled = true;
+        senderPhoneInput.value = '';
+      }
+    } else {
+      senderInput.disabled = false;
+      senderInput.placeholder = 'Ex: Maria Aparecida, Lucas Silva...';
+      if (boxPhoneDevotional) {
+        boxPhoneDevotional.style.opacity = '1';
+        boxPhoneDevotional.style.pointerEvents = 'auto';
+      }
+      if (senderPhoneInput) {
+        senderPhoneInput.disabled = false;
+      }
     }
-    if (senderPhoneInput) {
-      senderPhoneInput.disabled = true;
-      senderPhoneInput.value = '';
-    }
-  } else {
-    senderInput.disabled = false;
-    senderInput.placeholder = 'Ex: Maria Aparecida, Lucas Silva...';
-    if (boxPhoneDevotional) {
-      boxPhoneDevotional.style.opacity = '1';
-      boxPhoneDevotional.style.pointerEvents = 'auto';
-    }
-    if (senderPhoneInput) {
-      senderPhoneInput.disabled = false;
-    }
-  }
-});
+  });
+}
 
-// Alternância de Anônimo: Para quem é a oração
-checkAnonTarget.addEventListener('change', (e) => {
-  if (e.target.checked) {
-    targetInput.value = '';
-    targetInput.disabled = true;
-    targetInput.placeholder = 'Pessoa mantida em sigilo diante de Deus';
-  } else {
-    targetInput.disabled = false;
-    targetInput.placeholder = 'Ex: Por mim mesmo, Por minha mãe Helena...';
-  }
-});
+if (checkAnonTarget) {
+  checkAnonTarget.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      targetInput.value = '';
+      targetInput.disabled = true;
+      targetInput.placeholder = 'Pessoa mantida em sigilo';
+    } else {
+      targetInput.disabled = false;
+      targetInput.placeholder = 'Ex: Por mim mesmo, Por minha mãe Helena...';
+    }
+  });
+}
 
 // Submissão do Formulário
 form.addEventListener('submit', (e) => {
@@ -208,57 +211,79 @@ form.addEventListener('submit', (e) => {
     };
   }
 
-  const isSenderAnon = checkAnonSender.checked;
-  const rawSender = senderInput.value.trim();
-  let senderName = isSenderAnon || !rawSender ? 'Anônimo' : rawSender;
+  // VALIDAÇÃO OBRIGATÓRIA DOS CAMPOS 1, 2 E 3
+  let senderName = '';
+  let targetPerson = '';
+  let purpose = '';
 
   const rawPhone = senderPhoneInput ? senderPhoneInput.value.trim() : '';
-  let phone = isSenderAnon ? '' : rawPhone;
-  const wantDevotional = !isSenderAnon && checkWantDevotional ? checkWantDevotional.checked : false;
-
-  const isTargetAnon = checkAnonTarget.checked;
-  const rawTarget = targetInput.value.trim();
-  let targetPerson = isTargetAnon || !rawTarget ? 'Em segredo / Anônimo' : rawTarget;
-
-  let purpose = purposeInput.value.trim();
-  const category = categoryInput.value;
-  const isUrgent = checkUrgent.checked;
+  let phone = rawPhone;
+  const wantDevotional = checkWantDevotional ? checkWantDevotional.checked : false;
+  const isUrgent = checkUrgent ? checkUrgent.checked : false;
+  const category = categoryInput ? categoryInput.value : 'Outros';
   const wantsToAttend = checkAttendService ? checkAttendService.checked : false;
 
-  // Quando solicita visita hospitalar, NÃO é necessário preencher o cadastro de cima:
   if (wantsHospitalVisit && hospitalVisitData) {
-    if (!rawSender && !isSenderAnon) {
-      senderName = hospitalVisitData.contactPhone ? `Familiar / Acompanhante (${hospitalVisitData.contactPhone})` : 'Familiar / Acompanhante';
-    }
+    // Quando solicita visita hospitalar, os dados do paciente suprem os campos superiores
+    const rawSender = senderInput ? senderInput.value.trim() : '';
+    senderName = rawSender || (hospitalVisitData.contactPhone ? `Familiar / Acompanhante (${hospitalVisitData.contactPhone})` : 'Familiar / Acompanhante');
     if (!phone && hospitalVisitData.contactPhone) {
       phone = hospitalVisitData.contactPhone;
     }
-    if (!rawTarget && !isTargetAnon) {
-      targetPerson = `${hospitalVisitData.patientName} (Paciente internado no ${hospitalVisitData.hospitalName})`;
-    }
-    if (!purpose) {
-      const contactText = hospitalVisitData.contactPhone ? ` Contato do acompanhante: ${hospitalVisitData.contactPhone}.` : '';
-      const extraNotes = hospitalVisitData.notes ? ` Observação: ${hospitalVisitData.notes}.` : '';
-      purpose = `Solicitação de visita pastoral no leito para o(a) paciente ${hospitalVisitData.patientName}, internado(a) no ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber}).${contactText}${extraNotes}`;
-    }
+    targetPerson = `${hospitalVisitData.patientName} (Internado no ${hospitalVisitData.hospitalName})`;
+    const contactText = hospitalVisitData.contactPhone ? ` Contato do acompanhante: ${hospitalVisitData.contactPhone}.` : '';
+    const extraNotes = hospitalVisitData.notes ? ` Observação: ${hospitalVisitData.notes}.` : '';
+    purpose = `Solicitação de visita pastoral no leito para o(a) paciente ${hospitalVisitData.patientName}, internado(a) no ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber}).${contactText}${extraNotes}`;
   } else {
-    // Validação normal caso NÃO seja visita hospitalar:
-    if (!purpose) {
-      alert('Por favor, escreva a sua oração ou propósito no campo 3.');
-      purposeInput.focus();
+    // CAMPO 1 OBRIGATÓRIO: Seu Nome
+    const rawSender = senderInput ? senderInput.value.trim() : '';
+    if (!rawSender) {
+      alert('⚠️ O CAMPO 1 É OBRIGATÓRIO!\n\nPor favor, digite o Seu Nome para enviar o pedido de oração.');
+      if (senderInput) {
+        senderInput.focus();
+        senderInput.classList.add('input-error-pulse');
+        setTimeout(() => senderInput.classList.remove('input-error-pulse'), 1800);
+      }
       return;
     }
+    senderName = rawSender;
+
+    // CAMPO 2 OBRIGATÓRIO: Para quem é a oração
+    const rawTarget = targetInput ? targetInput.value.trim() : '';
+    if (!rawTarget) {
+      alert('⚠️ O CAMPO 2 É OBRIGATÓRIO!\n\nPor favor, informe para quem é esta oração no campo 2 (ex: "Por mim mesmo", "Por minha família", "Pela minha empresa").');
+      if (targetInput) {
+        targetInput.focus();
+        targetInput.classList.add('input-error-pulse');
+        setTimeout(() => targetInput.classList.remove('input-error-pulse'), 1800);
+      }
+      return;
+    }
+    targetPerson = rawTarget;
+
+    // CAMPO 3 OBRIGATÓRIO: A oração ou propósito
+    const rawPurpose = purposeInput ? purposeInput.value.trim() : '';
+    if (!rawPurpose) {
+      alert('⚠️ O CAMPO 3 É OBRIGATÓRIO!\n\nPor favor, escreva a sua oração ou propósito no campo 3.');
+      if (purposeInput) {
+        purposeInput.focus();
+        purposeInput.classList.add('input-error-pulse');
+        setTimeout(() => purposeInput.classList.remove('input-error-pulse'), 1800);
+      }
+      return;
+    }
+    purpose = rawPurpose;
   }
 
   // Criação do objeto do pedido
   const newPrayer = {
     id: 'req-' + Date.now(),
     senderName: senderName,
-    isSenderAnon: isSenderAnon,
+    isSenderAnon: false,
     phone: phone,
     wantDevotional: wantDevotional && Boolean(phone),
     targetPerson: targetPerson,
-    isTargetAnon: isTargetAnon,
+    isTargetAnon: false,
     purpose: purpose,
     category: wantsHospitalVisit ? 'Visita Hospitalar' : (isUrgent ? 'Causa Urgente' : category),
     isUrgent: isUrgent || wantsHospitalVisit,

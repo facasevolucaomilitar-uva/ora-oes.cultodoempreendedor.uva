@@ -71,9 +71,10 @@
           <label for="sender-name" class="field-label">
             <span class="label-number">1</span>
             <span>Seu Nome</span>
+            <span class="badge-mandatory">* Obrigatório</span>
           </label>
           <div class="input-wrap">
-            <input type="text" id="sender-name" placeholder="Ex: Maria Aparecida, Lucas Silva..." autocomplete="name">
+            <input type="text" id="sender-name" placeholder="Ex: Maria Aparecida, Lucas Silva..." autocomplete="name" required>
           </div>
 
           <!-- Opção de Telefone para receber Devocional (Opcional) -->
@@ -92,11 +93,6 @@
               <span>✨ Desejo receber um devocional no meu WhatsApp</span>
             </label>
           </div>
-
-          <label class="checkbox-inline">
-            <input type="checkbox" id="check-anon-sender">
-            <span>Prefiro não me identificar (Enviar como Anônimo)</span>
-          </label>
         </div>
 
         <!-- CAMPO 2: Para quem é a oração -->
@@ -104,15 +100,12 @@
           <label for="target-person" class="field-label">
             <span class="label-number">2</span>
             <span>Para quem é esta oração?</span>
+            <span class="badge-mandatory">* Obrigatório</span>
           </label>
-          <p class="field-help">Indique por quem devemos orar (ex: "Minha mãe Helena", "Meu filho", "Por mim mesmo" ou mantenha anônimo).</p>
+          <p class="field-help">Indique por quem devemos orar (ex: "Por mim mesmo", "Por minha mãe Helena", "Pela minha empresa", "Pelo meu filho"...).</p>
           <div class="input-wrap">
-            <input type="text" id="target-person" placeholder="Ex: Por mim mesmo, Por minha mãe Helena, Pelo meu casamento...">
+            <input type="text" id="target-person" placeholder="Ex: Por mim mesmo, Por minha mãe Helena, Pelo meu casamento..." required>
           </div>
-          <label class="checkbox-inline">
-            <input type="checkbox" id="check-anon-target">
-            <span>Deixar a pessoa em segredo / Anônima</span>
-          </label>
         </div>
 
         <!-- CAMPO 3: A Oração ou Propósito -->
@@ -120,10 +113,11 @@
           <label for="prayer-purpose" class="field-label">
             <span class="label-number">3</span>
             <span>Qual é a oração ou propósito no seu coração?</span>
+            <span class="badge-mandatory">* Obrigatório</span>
           </label>
-          <p class="field-help">Escreva com o coração aberto. Seja para cura de saúde, paz na família, porta de emprego ou consolo.</p>
+          <p class="field-help">Escreva com o coração aberto o motivo da oração ou o propósito que você deseja colocar diante de Deus.</p>
           <div class="input-wrap">
-            <textarea id="prayer-purpose" rows="4" placeholder="Descreva aqui o motivo da oração ou o propósito que você deseja colocar diante de Deus..."></textarea>
+            <textarea id="prayer-purpose" rows="4" placeholder="Descreva aqui detalhadamente o seu pedido de oração ou propósito..." required></textarea>
           </div>
         </div>
 
@@ -417,19 +411,28 @@
       <button type="button" class="btn-new-submission" id="btn-new-submission">
         Enviar Outro Pedido de Oração
       </button>
-    </div>
 
-    <!-- Footer com Link Discreto para o Administrador -->
-    <footer class="public-footer">
-      <p>Círculo de Intercessão • Todos os direitos reservados</p>
-      <div class="admin-access-link">
-        <a href="admin.html" title="Acesso restrito ao Administrador">
-          🔒 Acesso do Administrador / Painel
+      <div class="conf-admin-shortcut">
+        <a href="admin.html" class="btn-conf-admin" title="Abrir painel administrativo para visualizar o pedido recebido">
+          <span>🔒 Abrir Meu Painel de Administrador</span>
+          <span>→</span>
         </a>
       </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="public-footer">
+      <p>Círculo de Intercessão • Todos os direitos reservados</p>
     </footer>
 
   </div>
+
+  <!-- Botão Flutuante Fixo do Painel do Administrador (Sempre visível no rodapé no canto direito) -->
+  <a href="admin.html" id="btn-floating-admin" class="btn-floating-admin" title="Abrir Painel do Administrador (Acesso com PIN)">
+    <span class="floating-admin-pulse"></span>
+    <span class="floating-admin-icon">🔒</span>
+    <span class="floating-admin-text">Painel do Administrador</span>
+  </a>
 
   <script src="pedir.js"></script>
 </body>

@@ -270,6 +270,27 @@ class AdminApp {
 
   // --- Eventos do Dashboard ---
   bindDashboardEvents() {
+    // Sincronização em Tempo Real com o Formulário Público (novos pedidos aparecem instantaneamente)
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY) {
+        this.loadData();
+        this.renderAll();
+      }
+    });
+
+    // Atualiza automaticamente quando o administrador clica ou volta para a aba
+    window.addEventListener('focus', () => {
+      this.loadData();
+      this.renderAll();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        this.loadData();
+        this.renderAll();
+      }
+    });
+
     // Filtros por Período (Tabs)
     const periodButtons = document.querySelectorAll('.period-btn');
     periodButtons.forEach(btn => {
