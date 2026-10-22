@@ -71,6 +71,16 @@
         </div>
 
         <div class="admin-actions">
+          <div id="active-user-badge" class="active-user-pill" title="Obreiro conectado atualmente">
+            <span class="user-pill-icon">👤</span>
+            <div class="user-pill-info">
+              <span class="user-pill-role" id="user-role-label">Obreiro</span>
+              <strong class="user-pill-name" id="user-name-label">Carregando...</strong>
+            </div>
+          </div>
+          <button id="btn-view-logs" class="btn btn-secondary btn-sm" title="Ver Histórico de Acessos e Intercessões">
+            📋 Registro de Movimentações
+          </button>
           <button id="btn-print-hospital" class="btn btn-secondary btn-sm btn-print-hosp-top" title="Gerar Lista em PDF das Visitas Feitas nos Hospitais">
             🏥 Visitas Hospitalares (PDF)
           </button>
@@ -167,21 +177,44 @@
       </div>
     </main>
 
-    <!-- MODAL: Configurações & Alterar PIN -->
+    <!-- MODAL: Configurações & Usuários / Contas de Acesso -->
     <div id="modal-settings" class="modal-overlay hidden">
       <div class="modal-card">
         <div class="modal-header">
-          <h2 class="modal-title">⚙️ Configurações do Intercessor</h2>
+          <h2 class="modal-title">⚙️ Configurações & Contas de Acesso</h2>
           <button class="btn-close-modal" id="btn-close-settings">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label for="input-new-pin">Alterar Senha do Administrador:</label>
-            <input type="password" id="input-new-pin" maxlength="20" placeholder="Digite uma nova senha">
-            <small style="color: var(--text-muted);">Deixe vazio para manter a senha atual inalterada.</small>
+          <div class="obreiros-accounts-list">
+            <label><strong>Contas Autorizadas da Administração:</strong></label>
+            <div class="obreiros-accounts-grid">
+              <div class="account-badge-item">
+                <span class="acc-role admin">Administrador</span>
+                <strong class="acc-name">Rodolfo</strong>
+                <span class="acc-status">● Ativo</span>
+              </div>
+              <div class="account-badge-item">
+                <span class="acc-role pastor">Pastor</span>
+                <strong class="acc-name">Arnaldo</strong>
+                <span class="acc-status">● Ativo</span>
+              </div>
+              <div class="account-badge-item">
+                <span class="acc-role presbitero">Presbítero</span>
+                <strong class="acc-name">Nilzon</strong>
+                <span class="acc-status">● Ativo</span>
+              </div>
+              <div class="account-badge-item">
+                <span class="acc-role presbitero">Presbítero</span>
+                <strong class="acc-name">Moacir</strong>
+                <span class="acc-status">● Ativo</span>
+              </div>
+            </div>
+            <small style="color: var(--text-muted); display: block; margin-top: 6px;">
+              Cada obreiro possui sua senha individual de acesso. Toda ação e intercessão realizada fica gravada com o nome do obreiro e data/hora.
+            </small>
           </div>
 
-          <div class="form-group" style="margin-top: 10px;">
+          <div class="form-group" style="margin-top: 14px;">
             <label>Backup e Segurança dos Dados:</label>
             <div style="display: flex; gap: 10px; margin-top: 6px;">
               <button id="btn-admin-export" class="btn btn-secondary btn-sm">Salvar Backup (JSON)</button>
@@ -190,7 +223,62 @@
           </div>
         </div>
         <div class="modal-actions" style="padding: 16px 24px; border-top: 1px solid var(--border-color);">
-          <button id="btn-save-settings" class="btn btn-primary">Salvar Alterações</button>
+          <button id="btn-close-settings-bottom" class="btn btn-secondary">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Registro de Movimentações & Histórico de Intercessões -->
+    <div id="modal-audit-logs" class="modal-overlay hidden">
+      <div class="modal-card modal-large">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title">📋 Registro de Movimentações da Área Administrativa</h2>
+            <p class="modal-subtext">Histórico completo de acessos (login) e intercessões realizadas por cada obreiro</p>
+          </div>
+          <button class="btn-close-modal" id="btn-close-logs">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="logs-toolbar">
+            <div class="logs-filter-group">
+              <label for="filter-logs-obreiro"><strong>Filtrar por Obreiro:</strong></label>
+              <select id="filter-logs-obreiro" class="status-dropdown">
+                <option value="all">Todos os Obreiros</option>
+                <option value="Rodolfo">Rodolfo (Admin)</option>
+                <option value="Pastor Arnaldo">Pastor Arnaldo</option>
+                <option value="Presbítero Nilzon">Presbítero Nilzon</option>
+                <option value="Presbítero Moacir">Presbítero Moacir</option>
+              </select>
+            </div>
+            <div id="logs-count-summary" class="logs-count-pill">
+              0 movimentações registradas
+            </div>
+          </div>
+
+          <!-- Tabela de Movimentações -->
+          <div class="logs-table-wrap">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Data & Hora</th>
+                  <th>Obreiro / Responsável</th>
+                  <th>Tipo de Ação</th>
+                  <th>Detalhes da Movimentação</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table-body">
+                <!-- Preenchido dinamicamente via JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="logs-empty-state" class="empty-state hidden" style="padding: 24px;">
+            <p>Nenhuma movimentação registrada até o momento.</p>
+          </div>
+        </div>
+        <div class="modal-actions modal-actions-between" style="padding: 16px 24px; border-top: 1px solid var(--border-color);">
+          <button id="btn-clear-logs" class="btn btn-subtle btn-sm" title="Limpar histórico de movimentações">Limpar Registros Antigos</button>
+          <button id="btn-close-logs-bottom" class="btn btn-primary">Fechar</button>
         </div>
       </div>
     </div>

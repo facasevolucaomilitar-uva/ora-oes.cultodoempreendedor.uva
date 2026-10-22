@@ -3,7 +3,26 @@
 
 Aplicativo desenvolvido para o **Culto do Empreendedor da Igreja Assembleia de Deus de União da Vitória - PR**, estruturado nas duas etapas:
 1. **Formulário Público (index.html)**: O link personalizado com a logo oficial de alta definição do Culto do Empreendedor para enviar aos irmãos, empresários e membros, onde preenchem apenas os 3 campos e **não têm acesso** aos pedidos das outras pessoas.
-2. **Painel do Administrador (admin.html)**: O mural protegido por senha restrita (**`104832`**) onde **somente a liderança pastoral e intercessores** veem todos os pedidos recebidos, com filtros por **Dia (Hoje)**, **Semana** e **Mês**.
+2. **Painel do Administrador (admin.html)**: O mural protegido por senhas individuais onde a liderança pastoral e obreiros autorizados acessam os pedidos, intercedem e têm suas movimentações e orações registradas com data e hora.
+
+---
+
+## 🔐 Contas de Acesso dos Obreiros & Senhas Individuais
+
+Cada responsável possui sua própria senha de acesso à área administrativa:
+
+| Obreiro | Função | Senha de Acesso | Registro no Painel |
+| :--- | :--- | :--- | :--- |
+| **Nilzon** | Presbítero | **`0880`** | Registra login, intercessões e anotações como *Presbítero Nilzon* |
+| **Moacir** | Presbítero | **`6594`** | Registra login, intercessões e anotações como *Presbítero Moacir* |
+| **Arnaldo** | Pastor | **`0566`** | Registra login, intercessões e anotações como *Pastor Arnaldo* |
+| **Rodolfo** | Administrador Geral | **`104832`** | Registra login, intercessões e anotações como *Rodolfo* |
+
+### 📋 Registro de Movimentações & Auditoria em Tempo Real
+- **Histórico de Acesso (Login/Logout):** Fica gravado exatamente quando cada obreiro entrou ou saiu do painel.
+- **Intercessão Nominal:** Ao clicar em **"Interceder Agora 🙏"**, o sistema grava o nome do obreiro que realizou a oração e o horário exato. O cartão do pedido passa a exibir tags de quem já orou por aquela causa (ex: `✓ Pastor Arnaldo (há 5 min)`).
+- **Graças Alcançadas e Anotações:** Registra qual obreiro marcou o testemunho de vitória ou atualizou anotações pastorais.
+- **Botão "📋 Registro de Movimentações":** No topo do painel administrativo, permite visualizar a tabela completa de logs, com filtro por obreiro.
 
 ---
 
@@ -26,24 +45,25 @@ Aplicativo desenvolvido para o **Culto do Empreendedor da Igreja Assembleia de D
 - **🏛️ Convite Presencial & Localização:** Opção interativa para quem desejar participar presencialmente do culto, com endereço (Rua Ipiranga, 357 — Centro, União da Vitória - PR) e rota direta no **Google Maps**.
 - **🏥 Visita Presencial em Hospitais (Capelania Pastoral):** Campo exclusivo com ícone de hospital e subtítulo explicativo onde familiares e membros podem solicitar a visita de um pastor ao leito de enfermos internados.
   - **🗓️ Dia de Visitas:** As visitas aos hospitais são realizadas **exclusivamente às quartas-feiras**.
-  - **📞 Plantão dos Obreiros com WhatsApp Direto:** Acesso rápido ao contato do **Pastor Arnaldo** `(42) 99822-1056`, **Presbítero Nilzom** `(42) 99970-0880` e **Presbítero Moacir** `(42) 9995-6594` com botões diretos para conversar no WhatsApp.
+  - **Privacidade dos Telefones:** Os números de telefone pessoais dos obreiros foram removidos da tela pública para preservar a privacidade, mantendo a solicitação segura através do formulário.
 - **📸 Instagram Oficial:** Botão direto com link para o perfil exclusivo **`@cultodoempreendedoruva`** (https://www.instagram.com/cultodoempreendedoruva/).
 
 ---
 
 ### 2️⃣ Parte 2: Painel Privado do Administrador (`admin.html`)
-- **Acesso Restrito:** Protegido por senha exclusiva do administrador (**`104832`**).
-- **Mural Exclusivo:** Somente você tem acesso aos pedidos recebidos.
+- **Acesso Individual dos Obreiros:** Protegido pelas senhas individuais (**`0880`**, **`6594`**, **`0566`**, **`104832`**).
+- **Identificação do Usuário:** No topo do painel é exibido um crachá com o nome e cargo do obreiro logado no momento.
+- **Mural Exclusivo:** Somente você e os obreiros autorizados têm acesso aos pedidos recebidos.
 - **Filtros Temporais Exigidos:**
   - 📅 **Por Dia (Hoje)**: Mostra somente os pedidos que chegaram no dia de hoje.
   - 🗓️ **Por Semana**: Mostra os pedidos dos últimos 7 dias.
   - 📆 **Por Mês**: Mostra os pedidos dos últimos 30 dias.
   - 📋 **Todos**: Histórico completo de pedidos.
 - **Recursos para o Intercessor:**
-  - Botão **"Interceder Agora 🙏"**: Incrementa o contador de orações realizadas e marca o pedido como orado com toque suave de sino.
-  - Botão **"Graça Alcançada 🎉"**: Registra testemunhos de orações respondidas.
+  - Botão **"Interceder Agora 🙏"**: Incrementa o contador de orações, registra qual obreiro intercedeu no log e adiciona a tag do obreiro no cartão.
+  - Botão **"Graça Alcançada 🎉"**: Registra testemunhos de orações respondidas com o nome do obreiro que registrou.
   - **Anotações Pastorais**: Campo de anotação privada em cada pedido (ex: *"Orado no culto de quarta"*, *"Ligar para a pessoa"*).
-  - **🖨️ Imprimir / PDF**: Gera uma lista limpa para levar para cultos, reuniões de oração ou vigílias (inclui nomes dos obreiros e capelania).
+  - **🖨️ Imprimir / PDF**: Gera uma lista limpa para levar para cultos, reuniões de oração ou vigílias.
   - **🏥 Gestão de Visitas Hospitalares**: Destaque com etiqueta ciano e card especial contendo dados do leito, hospital, paciente e botão direto para falar com o acompanhante no WhatsApp.
   - **Filtro Rápido no Painel**: Seleção direta por "🏥 Visitas Hospitalares" no menu de status.
 
@@ -55,7 +75,11 @@ Basta abrir os arquivos no seu navegador:
 - **Para testar o formulário que você vai mandar para as pessoas:**
   - Dê um duplo clique em [index.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/index.html)
 - **Para acessar o seu painel de administrador:**
-  - Dê um duplo clique em [admin.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/admin.html) e digite a senha `104832`.
+  - Dê um duplo clique em [admin.html](file:///C:/Users/Usuario/.gemini/antigravity/scratch/oracoes-app/admin.html) e entre com a senha de qualquer um dos obreiros:
+    - Nilzon: `0880`
+    - Moacir: `6594`
+    - Arnaldo: `0566`
+    - Rodolfo: `104832`
 
 ---
 

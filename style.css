@@ -1963,6 +1963,14 @@ body {
   user-select: none;
 }
 
+.hospital-card-header-top-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
 /* Ícone com Desenho de Hospital e Subtítulo Pequeno Embaixo */
 .hospital-icon-wrapper {
   display: flex;
@@ -3137,21 +3145,37 @@ button:active,
   }
 
   /* Card Especial de Visita Hospitalar no Celular */
+  /* Card Especial de Visita Hospitalar no Celular */
   .hospital-visit-card {
     padding: 14px 12px;
     border-radius: 18px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .hospital-card-header {
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Linha com Ícone e Títulos lado a lado no celular */
+  .hospital-card-header-top-row {
+    display: flex;
     align-items: flex-start;
+    gap: 12px;
+    width: 100%;
   }
 
   .hospital-icon-wrapper {
-    width: 58px;
-    min-width: 58px;
+    width: 50px;
+    min-width: 50px;
     padding: 6px 4px;
     border-radius: 12px;
+    flex-shrink: 0;
   }
 
   .hospital-svg-icon {
@@ -3160,45 +3184,130 @@ button:active,
   }
 
   .hospital-sub-label {
-    font-size: 0.54rem;
+    font-size: 0.52rem;
     letter-spacing: 0.02em;
-    margin-top: 3px;
+    margin-top: 2px;
+    line-height: 1.1;
   }
 
   .hospital-header-text {
+    flex: 1;
     min-width: 0;
-  }
-
-  .floating-solicitar-btn {
-    padding: 8px 12px;
-    font-size: 0.78rem;
-    gap: 6px;
+    width: 100%;
   }
 
   .hospital-header-top {
-    gap: 6px;
-  }
-
-  .hospital-badge-top {
-    font-size: 0.68rem;
-    padding: 2px 7px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
   }
 
   .hospital-title {
-    font-size: 0.94rem;
+    font-size: 0.98rem;
     line-height: 1.25;
+    word-break: break-word;
   }
 
-  .hospital-subtitle {
+  .badge-capelania {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .badge-wednesday {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    white-space: normal;
+  }
+
+  .hospital-desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .hospital-day-highlight {
     font-size: 0.78rem;
     line-height: 1.35;
+    margin-top: 4px;
+  }
+
+  /* Botão SOLICITAR com largura total no celular para fácil clique */
+  .hospital-checkbox-wrap {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .floating-solicitar-btn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.86rem;
+    gap: 8px;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Formulário de Visita Expandido no Celular */
+  .hospital-visit-form-details {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 14px;
+    padding-top: 14px;
+    gap: 12px;
+  }
+
+  .hospital-info-banner {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    border-radius: 12px;
+    word-break: break-word;
+    box-sizing: border-box;
+  }
+
+  .hospital-wednesday-notice {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    border-radius: 8px;
+    word-break: break-word;
+    box-sizing: border-box;
   }
 
   .hospital-grid-fields {
     grid-template-columns: 1fr;
     gap: 12px;
-    margin-top: 14px;
-    padding-top: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hosp-field-group {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hosp-field-label {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .hosp-input,
+  .hosp-select,
+  .hosp-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 16px !important; /* Previne auto-zoom no iOS */
+    padding: 10px 12px;
+  }
+
+  .hosp-privacy-tag {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    flex-wrap: wrap;
+    word-break: break-word;
   }
 
   /* Bloco de Obreiros no Celular */
@@ -3682,6 +3791,8 @@ button:active,
   .action-buttons-group {
     grid-template-columns: 1fr;
   }
+}
+
 /* ----------------------------------------------------
    4. ESTILOS DE GESTÃO DE OBREIROS & AUDITORIA DE MOVIMENTAÇÕES
    ---------------------------------------------------- */
