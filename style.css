@@ -2075,15 +2075,102 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
+  position: relative;
 }
 
 .hospital-checkbox-wrap input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Botão SOLICITAR Flutuante e Super Destacado */
+.floating-solicitar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 40%, #0c4a6e 100%);
+  color: #ffffff !important;
+  border: 1.5px solid #38bdf8;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  accent-color: #0284c7;
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.45), 0 0 12px rgba(56, 189, 248, 0.35);
+  animation: floatPulseBtn 2.4s ease-in-out infinite;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.floating-solicitar-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #0369a1 100%);
+  box-shadow: 0 8px 28px rgba(14, 165, 233, 0.65), 0 0 20px rgba(56, 189, 248, 0.6);
+  border-color: #ffffff;
+  color: #ffffff !important;
+}
+
+.floating-solicitar-btn:active {
+  transform: scale(0.96);
+}
+
+/* Quando o card está aberto/ativo */
+.hospital-visit-card.active-open .floating-solicitar-btn {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  border-color: #86efac;
+  box-shadow: 0 4px 18px rgba(22, 163, 74, 0.45);
+  animation: none;
+}
+
+.hospital-visit-card.active-open .floating-solicitar-btn .btn-solicitar-text::after {
+  content: ' (ABERTO)';
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.hospital-visit-card.active-open .floating-solicitar-btn .btn-solicitar-arrow {
+  transform: rotate(180deg);
+}
+
+.btn-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #fef08a;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px #fef08a;
+  animation: dotBlink 1.4s infinite;
+}
+
+.btn-solicitar-arrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: transform 0.25s ease;
+}
+
+@keyframes floatPulseBtn {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.45), 0 0 8px rgba(56, 189, 248, 0.3);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(14, 165, 233, 0.65), 0 0 18px rgba(56, 189, 248, 0.55);
+  }
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
 }
 
 .toggle-hint-pill {
@@ -3082,6 +3169,12 @@ button:active,
     min-width: 0;
   }
 
+  .floating-solicitar-btn {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+
   .hospital-header-top {
     gap: 6px;
   }
@@ -3589,5 +3682,243 @@ button:active,
   .action-buttons-group {
     grid-template-columns: 1fr;
   }
+/* ----------------------------------------------------
+   4. ESTILOS DE GESTÃO DE OBREIROS & AUDITORIA DE MOVIMENTAÇÕES
+   ---------------------------------------------------- */
+.active-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
 }
 
+.user-role-badge {
+  background: var(--gold-dark);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.obreiros-accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.account-badge-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.acc-role {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.acc-role.admin {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.acc-role.pastor {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fde047;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.acc-role.presbitero {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.acc-name {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.acc-status {
+  font-size: 0.72rem;
+  color: #4ade80;
+}
+
+/* Modal de Logs e Tabela */
+.modal-large {
+  max-width: 860px;
+  width: 95%;
+}
+
+.logs-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logs-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logs-count-pill {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.logs-table-wrap {
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  color: #0f172a;
+}
+
+.logs-table th {
+  background: #f1f5f9;
+  color: #1e293b;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid #cbd5e1;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.logs-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.logs-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.logs-table tr:hover td {
+  background: #eff6ff;
+}
+
+.badge-log-action {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-log-login {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-log-logout {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.badge-log-pray {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-log-victory {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge-log-note {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.badge-log-delete {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-log-default {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* Intercessor History Box on Cards */
+.intercessor-history-box {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-top: 10px;
+}
+
+.intercessor-history-title {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #6ee7b7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.intercessor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.intercessor-chip {
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #a7f3d0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.intercessor-chip small {
+  opacity: 0.75;
+  font-size: 0.68rem;
+}

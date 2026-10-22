@@ -4,9 +4,36 @@
  */
 
 const STORAGE_KEY = 'circulo_oracoes_db_v1';
-const PIN_KEY = 'circulo_oracoes_admin_pin_v2';
-const DEFAULT_ADMIN_PASSWORD = '104832';
-const AUTH_SESSION_KEY = 'circulo_admin_session_auth_v1';
+// Constantes de Contas dos Obreiros & Senhas
+const OBREIRO_USERS = {
+  '0880': {
+    id: 'nilzon',
+    name: 'Presbítero Nilzon',
+    role: 'Presbítero',
+    badgeClass: 'presbitero'
+  },
+  '6594': {
+    id: 'moacir',
+    name: 'Presbítero Moacir',
+    role: 'Presbítero',
+    badgeClass: 'presbitero'
+  },
+  '0566': {
+    id: 'arnaldo',
+    name: 'Pastor Arnaldo',
+    role: 'Pastor',
+    badgeClass: 'pastor'
+  },
+  '104832': {
+    id: 'rodolfo',
+    name: 'Rodolfo',
+    role: 'Administrador Geral',
+    badgeClass: 'admin'
+  }
+};
+
+const AUDIT_LOGS_KEY = 'circulo_oracoes_audit_logs_v1';
+const CURRENT_USER_SESSION_KEY = 'circulo_admin_current_user_v1';
 
 // Dados de Exemplo Iniciais (caso seja o primeiro acesso)
 const SAMPLE_DATA = [
@@ -25,6 +52,7 @@ const SAMPLE_DATA = [
     hospitalVisit: {
       requested: true,
       patientName: 'Geraldo de Oliveira',
+      patientPhone: '(42) 99881-2233',
       hospitalName: 'Hospital APMI (União da Vitória)',
       roomNumber: 'Quarto 312 - Ala B (Clínica Médica)',
       contactPhone: '(42) 99123-7788',
@@ -50,6 +78,7 @@ const SAMPLE_DATA = [
     hospitalVisit: {
       requested: true,
       patientName: 'Francisca Ribeiro (68 anos)',
+      patientPhone: '(42) 99911-4455',
       hospitalName: 'Hospital Regional São Camilo (União da Vitória)',
       roomNumber: 'Quarto 104 - Leito 2 (Ala Feminina)',
       contactPhone: '(42) 99876-1122',
@@ -75,6 +104,7 @@ const SAMPLE_DATA = [
     hospitalVisit: {
       requested: true,
       patientName: 'Marcos Vinícius (7 anos)',
+      patientPhone: '',
       hospitalName: 'Hospital de Caridade São Braz (Porto União)',
       roomNumber: 'Quarto 208 (Pediatria)',
       contactPhone: '(42) 98833-4455',
@@ -170,7 +200,6 @@ class AdminApp {
   }
 
   init() {
-    this.ensureDefaultPin();
     this.loadData();
     this.bindLoginEvents();
     this.bindDashboardEvents();
@@ -182,35 +211,61 @@ class AdminApp {
     }
   }
 
-  // --- Senha & Autenticação ---
-  ensureDefaultPin() {
-    const current = localStorage.getItem(PIN_KEY);
-    const legacy = localStorage.getItem('circulo_oracoes_admin_pin_v1');
-    if (!current || current === '1234' || legacy === '1234') {
-      localStorage.setItem(PIN_KEY, DEFAULT_ADMIN_PASSWORD);
-      localStorage.removeItem('circulo_oracoes_admin_pin_v1');
-    }
+  // --- Senha & Autenticação dos Obreiros ---
+  getCurrentUser() {
+    try {
+      const stored = sessionStorage.getItem(CURRENT_USER_SESSION_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {}
+    return null;
   }
 
-  getSavedPin() {
-    const pin = localStorage.getItem(PIN_KEY);
-    if (!pin || pin === '1234') {
-      localStorage.setItem(PIN_KEY, DEFAULT_ADMIN_PASSWORD);
-      return DEFAULT_ADMIN_PASSWORD;
+  setCurrentUser(user) {
+    if (user) {
+      sessionStorage.setItem(CURRENT_USER_SESSION_KEY, JSON.stringify(user));
+    } else {
+      sessionStorage.removeItem(CURRENT_USER_SESSION_KEY);
     }
-    return pin;
-  }
-
-  setNewPin(newPin) {
-    localStorage.setItem(PIN_KEY, newPin);
   }
 
   isUserAuthenticated() {
-    return sessionStorage.getItem(AUTH_SESSION_KEY) === 'true';
+    return this.getCurrentUser() !== null;
   }
 
-  setAuthenticated(status) {
-    sessionStorage.setItem(AUTH_SESSION_KEY, status ? 'true' : 'false');
+  // --- Registro de Auditoria / Movimentações ---
+  getAuditLogs() {
+    try {
+      const raw = localStorage.getItem(AUDIT_LOGS_KEY);
+      if (raw) {
+        return JSON.parse(raw);
+      }
+    } catch (e) {}
+    return [];
+  }
+
+  logMovement(actionType, details, obreiro = null) {
+    try {
+      const user = obreiro || this.getCurrentUser() || { name: 'Sistema', role: 'Administração' };
+      const logs = this.getAuditLogs();
+      const newEntry = {
+        id: 'log-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+        timestamp: Date.now(),
+        obreiroName: user.name,
+        obreiroRole: user.role,
+        actionType: actionType, // 'Acesso (Login)', 'Intercessão Realizada', 'Graça Alcançada', 'Anotação', 'Exclusão'
+        details: details
+      };
+      logs.unshift(newEntry);
+      // Manter os últimos 300 registros
+      if (logs.length > 300) {
+        logs.length = 300;
+      }
+      localStorage.setItem(AUDIT_LOGS_KEY, JSON.stringify(logs));
+    } catch (e) {
+      console.warn('Erro ao registrar log de movimentação:', e);
+    }
   }
 
   showLogin() {
@@ -223,7 +278,18 @@ class AdminApp {
   showDashboard() {
     document.getElementById('admin-login-screen').classList.add('hidden');
     document.getElementById('admin-main-dashboard').classList.remove('hidden');
+    this.updateActiveUserUI();
     this.renderAll();
+  }
+
+  updateActiveUserUI() {
+    const user = this.getCurrentUser();
+    const nameLabel = document.getElementById('user-name-label');
+    const roleLabel = document.getElementById('user-role-label');
+    if (user) {
+      if (nameLabel) nameLabel.textContent = user.name;
+      if (roleLabel) roleLabel.textContent = user.role;
+    }
   }
 
   bindLoginEvents() {
@@ -234,12 +300,18 @@ class AdminApp {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const enteredPin = pinInput.value.trim();
-      const actualPin = this.getSavedPin();
 
-      if (enteredPin === actualPin) {
+      // Verifica se a senha corresponde a algum dos obreiros configurados
+      if (OBREIRO_USERS[enteredPin]) {
+        const loggedUser = OBREIRO_USERS[enteredPin];
         errorMsg.classList.add('hidden');
-        this.setAuthenticated(true);
+        this.setCurrentUser(loggedUser);
+        
+        // Registrar movimentação de acesso
+        this.logMovement('Acesso ao Painel', `Entrou na área administrativa com sua senha restrita`, loggedUser);
+        
         this.showDashboard();
+        this.showToast(`Bem-vindo, ${loggedUser.name}!`);
       } else {
         errorMsg.classList.remove('hidden');
         pinInput.value = '';
@@ -248,8 +320,13 @@ class AdminApp {
     });
 
     document.getElementById('btn-admin-logout').addEventListener('click', () => {
-      this.setAuthenticated(false);
+      const user = this.getCurrentUser();
+      if (user) {
+        this.logMovement('Saída do Painel', `Desconectou-se da área administrativa`, user);
+      }
+      this.setCurrentUser(null);
       this.showLogin();
+      this.showToast('Você saiu da área administrativa.');
     });
   }
 
@@ -383,39 +460,84 @@ class AdminApp {
 
     // Modal Configurações
     const modalSettings = document.getElementById('modal-settings');
-    document.getElementById('btn-open-settings').addEventListener('click', () => {
-      modalSettings.classList.remove('hidden');
-    });
-    document.getElementById('btn-close-settings').addEventListener('click', () => {
-      modalSettings.classList.add('hidden');
-    });
+    const btnOpenSettings = document.getElementById('btn-open-settings');
+    const btnCloseSettings = document.getElementById('btn-close-settings');
+    const btnCloseSettingsBtm = document.getElementById('btn-close-settings-bottom');
 
-    document.getElementById('btn-save-settings').addEventListener('click', () => {
-      const newPin = document.getElementById('input-new-pin').value.trim();
-      if (newPin) {
-        if (newPin.length < 3) {
-          alert('A nova senha deve ter no mínimo 3 caracteres.');
-          return;
-        }
-        this.setNewPin(newPin);
-        this.showToast('Senha do administrador alterada com sucesso!');
-      }
-      modalSettings.classList.add('hidden');
-    });
-
-    document.getElementById('btn-admin-export').addEventListener('click', () => {
-      this.exportBackup();
-    });
-
-    document.getElementById('btn-seed-samples').addEventListener('click', () => {
-      if (confirm('Deseja recarregar os exemplos de demonstração?')) {
-        this.prayers = SAMPLE_DATA;
-        this.saveData();
-        this.renderAll();
+    if (btnOpenSettings && modalSettings) {
+      btnOpenSettings.addEventListener('click', () => {
+        modalSettings.classList.remove('hidden');
+      });
+    }
+    if (btnCloseSettings && modalSettings) {
+      btnCloseSettings.addEventListener('click', () => {
         modalSettings.classList.add('hidden');
-        this.showToast('Exemplos carregados!');
-      }
-    });
+      });
+    }
+    if (btnCloseSettingsBtm && modalSettings) {
+      btnCloseSettingsBtm.addEventListener('click', () => {
+        modalSettings.classList.add('hidden');
+      });
+    }
+
+    const btnAdminExport = document.getElementById('btn-admin-export');
+    if (btnAdminExport) {
+      btnAdminExport.addEventListener('click', () => {
+        this.exportBackup();
+      });
+    }
+
+    const btnSeedSamples = document.getElementById('btn-seed-samples');
+    if (btnSeedSamples) {
+      btnSeedSamples.addEventListener('click', () => {
+        if (confirm('Deseja recarregar os exemplos de demonstração?')) {
+          this.prayers = SAMPLE_DATA;
+          this.saveData();
+          this.renderAll();
+          modalSettings.classList.add('hidden');
+          this.showToast('Exemplos carregados!');
+        }
+      });
+    }
+
+    // Modal Registro de Movimentações (Audit Logs)
+    const modalAuditLogs = document.getElementById('modal-audit-logs');
+    const btnViewLogs = document.getElementById('btn-view-logs');
+    const btnCloseLogs = document.getElementById('btn-close-logs');
+    const btnCloseLogsBtm = document.getElementById('btn-close-logs-bottom');
+    const filterLogsObreiro = document.getElementById('filter-logs-obreiro');
+    const btnClearLogs = document.getElementById('btn-clear-logs');
+
+    if (btnViewLogs && modalAuditLogs) {
+      btnViewLogs.addEventListener('click', () => {
+        this.renderAuditLogsTable();
+        modalAuditLogs.classList.remove('hidden');
+      });
+    }
+    if (btnCloseLogs && modalAuditLogs) {
+      btnCloseLogs.addEventListener('click', () => {
+        modalAuditLogs.classList.add('hidden');
+      });
+    }
+    if (btnCloseLogsBtm && modalAuditLogs) {
+      btnCloseLogsBtm.addEventListener('click', () => {
+        modalAuditLogs.classList.add('hidden');
+      });
+    }
+    if (filterLogsObreiro) {
+      filterLogsObreiro.addEventListener('change', () => {
+        this.renderAuditLogsTable();
+      });
+    }
+    if (btnClearLogs) {
+      btnClearLogs.addEventListener('click', () => {
+        if (confirm('Deseja limpar todos os registros antigos de movimentações?')) {
+          localStorage.removeItem(AUDIT_LOGS_KEY);
+          this.renderAuditLogsTable();
+          this.showToast('Registros de movimentação limpos.');
+        }
+      });
+    }
 
     // Modal Testemunho Admin
     const modalTestimony = document.getElementById('modal-admin-testimony');
@@ -602,6 +724,10 @@ class AdminApp {
                 <strong>${this.escapeHTML(prayer.hospitalVisit.patientName)}</strong>
               </div>
               <div class="hosp-alert-item">
+                <span>📱 Tel. Paciente:</span>
+                <strong>${prayer.hospitalVisit.patientPhone ? this.escapeHTML(prayer.hospitalVisit.patientPhone) : '<span style="color:#94a3b8; font-weight:normal;">Não informado</span>'}</strong>
+              </div>
+              <div class="hosp-alert-item">
                 <span>🏥 Hospital:</span>
                 <strong>${this.escapeHTML(prayer.hospitalVisit.hospitalName)}</strong>
               </div>
@@ -620,17 +746,26 @@ class AdminApp {
                 </div>
               ` : ''}
             </div>
-            ${prayer.hospitalVisit.contactPhone ? `
-              <div class="hosp-alert-buttons-row">
+            <div class="hosp-alert-buttons-row">
+              ${prayer.hospitalVisit.patientPhone ? `
+                <a href="https://wa.me/55${prayer.hospitalVisit.patientPhone.replace(/\D/g, '')}?text=${encodeURIComponent('A paz do Senhor, ' + prayer.hospitalVisit.patientName + '! Somos a equipe de oração e capelania do Culto do Empreendedor da Assembleia de Deus. Estamos orando pela sua pronta recuperação e alinhando nossa visita no leito na quarta-feira.')}" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="btn-whatsapp-hosp" 
+                   title="Falar diretamente com o paciente no WhatsApp">
+                  💬 WhatsApp do Paciente
+                </a>
+              ` : ''}
+              ${prayer.hospitalVisit.contactPhone ? `
                 <a href="https://wa.me/55${prayer.hospitalVisit.contactPhone.replace(/\D/g, '')}?text=${encodeURIComponent('A paz do Senhor! Sou o pastor/intercessor do Culto do Empreendedor sobre a visita hospitalar ao(à) paciente ' + prayer.hospitalVisit.patientName + ' no ' + prayer.hospitalVisit.hospitalName + '. Gostaria de alinhar os detalhes para orarmos no leito.')}" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="btn-whatsapp-hosp" 
                    title="Falar com acompanhante no WhatsApp para alinhar visita">
-                  💬 Falar com Acompanhante no WhatsApp
+                  💬 WhatsApp do Acompanhante
                 </a>
-              </div>
-            ` : ''}
+              ` : ''}
+            </div>
           </div>
         ` : ''}
 
@@ -639,6 +774,20 @@ class AdminApp {
           <div class="purpose-title">Motivo / Propósito da Oração:</div>
           <p class="purpose-text">${this.escapeHTML(prayer.purpose)}</p>
         </div>
+
+        <!-- Registro de Quem Intercedeu -->
+        ${prayer.intercessions && prayer.intercessions.length ? `
+          <div class="intercessor-history-box">
+            <span class="intercessor-history-title">🕊️ Intercessões Registradas:</span>
+            <div class="intercessor-chips">
+              ${prayer.intercessions.map(i => `
+                <span class="intercessor-chip" title="Intercedido em ${this.formatDate(i.timestamp)}">
+                  ✓ ${this.escapeHTML(i.obreiroName)} <small>(${this.formatRelativeTime(i.timestamp)})</small>
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
 
         <!-- Anotações do Intercessor -->
         <div class="admin-notes-row">
@@ -708,6 +857,8 @@ class AdminApp {
         if (item) {
           item.notes = note;
           this.saveData();
+          const user = this.getCurrentUser();
+          this.logMovement('Anotação Pastoral', `Atualizou anotação no pedido #${item.id} (${item.targetPerson || 'Geral'})`);
           this.showToast('Anotação salva!');
         }
       });
@@ -719,25 +870,52 @@ class AdminApp {
     const item = this.prayers.find(p => p.id === id);
     if (!item) return;
 
+    const user = this.getCurrentUser() || { name: 'Intercessor', role: 'Obreiro' };
+
+    if (!item.intercessions) {
+      item.intercessions = [];
+    }
+
+    item.intercessions.push({
+      obreiroName: user.name,
+      obreiroRole: user.role,
+      timestamp: Date.now()
+    });
+
     item.intercessionCount = (item.intercessionCount || 0) + 1;
     if (item.status === 'pending') {
       item.status = 'prayed';
     }
 
+    // Registrar no Log Geral de Movimentações
+    this.logMovement(
+      'Intercessão Realizada', 
+      `Intercedeu em oração pelo pedido de "${item.targetPerson || item.senderName || 'Irmão(ã)'}"`,
+      user
+    );
+
     this.saveData();
     this.renderPrayersList();
     this.playChime();
-    this.showToast(`Você intercedeu por este pedido! (Total: ${item.intercessionCount} vezes) 🙏`);
+    this.showToast(`${user.name} intercedeu por este pedido! 🙏`);
   }
 
   markAnswered(id, testimony) {
     const item = this.prayers.find(p => p.id === id);
     if (!item) return;
 
+    const user = this.getCurrentUser() || { name: 'Intercessor', role: 'Obreiro' };
+
     item.status = 'answered';
     if (testimony) {
-      item.notes = (item.notes ? item.notes + ' | ' : '') + `Vitória: ${testimony}`;
+      item.notes = (item.notes ? item.notes + ' | ' : '') + `Vitória: ${testimony} (Reg. por ${user.name})`;
     }
+
+    this.logMovement(
+      'Graça Alcançada', 
+      `Marcou como graça alcançada o pedido de "${item.targetPerson || item.senderName}". ${testimony ? 'Testemunho: ' + testimony : ''}`,
+      user
+    );
 
     this.saveData();
     this.renderPrayersList();
@@ -746,7 +924,13 @@ class AdminApp {
   }
 
   deletePrayer(id) {
+    const item = this.prayers.find(p => p.id === id);
+    const targetDesc = item ? (item.targetPerson || item.senderName || id) : id;
+    const user = this.getCurrentUser();
+
     this.prayers = this.prayers.filter(p => p.id !== id);
+    this.logMovement('Exclusão de Pedido', `Removeu o pedido "${targetDesc}" do mural`, user);
+
     this.saveData();
     this.renderAll();
     this.showToast('Pedido removido com sucesso.');
@@ -813,6 +997,82 @@ class AdminApp {
     const hours = String(date.getHours()).padStart(2, '0');
     const mins = String(date.getMinutes()).padStart(2, '0');
     return `${day}/${month} às ${hours}:${mins}`;
+  }
+
+  formatRelativeTime(timestamp) {
+    if (!timestamp) return '';
+    const diff = Date.now() - timestamp;
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'Agora mesmo';
+    if (mins < 60) return `há ${mins} min`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `há ${hours}h`;
+    const days = Math.floor(hours / 24);
+    return `há ${days}d`;
+  }
+
+  // --- Renderização da Tabela de Registros de Movimentações ---
+  renderAuditLogsTable() {
+    const tbody = document.getElementById('logs-table-body');
+    const emptyState = document.getElementById('logs-empty-state');
+    const summaryCount = document.getElementById('logs-count-summary');
+    const filterSelect = document.getElementById('filter-logs-obreiro');
+    const selectedObreiro = filterSelect ? filterSelect.value : 'all';
+
+    let logs = this.getAuditLogs();
+
+    if (selectedObreiro !== 'all') {
+      logs = logs.filter(log => (log.obreiroName || '').includes(selectedObreiro));
+    }
+
+    if (summaryCount) {
+      summaryCount.textContent = `${logs.length} movimentação(ões) encontrada(s)`;
+    }
+
+    if (!tbody) return;
+
+    if (logs.length === 0) {
+      tbody.innerHTML = '';
+      if (emptyState) emptyState.classList.remove('hidden');
+      return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+
+    const actionBadgeClasses = {
+      'Acesso ao Painel': 'badge-log-login',
+      'Saída do Painel': 'badge-log-logout',
+      'Intercessão Realizada': 'badge-log-pray',
+      'Graça Alcançada': 'badge-log-victory',
+      'Anotação Pastoral': 'badge-log-note',
+      'Exclusão de Pedido': 'badge-log-delete'
+    };
+
+    tbody.innerHTML = logs.map(log => {
+      const dateStr = this.formatDate(log.timestamp);
+      const badgeCls = actionBadgeClasses[log.actionType] || 'badge-log-default';
+      const roleCls = (log.obreiroRole || '').toLowerCase().includes('pastor') ? 'pastor' : 
+                      (log.obreiroRole || '').toLowerCase().includes('presb') ? 'presbitero' : 'admin';
+
+      return `
+        <tr>
+          <td>
+            <div style="font-weight: 600; font-size: 0.82rem; color: #1e293b;">${dateStr}</div>
+            <div style="font-size: 0.72rem; color: #64748b;">${this.formatRelativeTime(log.timestamp)}</div>
+          </td>
+          <td>
+            <div style="font-weight: 700; color: #0f172a; font-size: 0.88rem;">${this.escapeHTML(log.obreiroName || 'Obreiro')}</div>
+            <span class="acc-role ${roleCls}" style="font-size: 0.68rem; padding: 2px 6px;">${this.escapeHTML(log.obreiroRole || 'Obreiro')}</span>
+          </td>
+          <td>
+            <span class="badge-log-action ${badgeCls}">${this.escapeHTML(log.actionType)}</span>
+          </td>
+          <td>
+            <div style="font-size: 0.85rem; color: #334155; line-height: 1.4;">${this.escapeHTML(log.details || '')}</div>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
   escapeHTML(str) {
@@ -897,6 +1157,7 @@ class AdminApp {
           </td>
           <td>
             <div style="font-weight: 800; font-size: 0.92rem; color: #0f172a;">${this.escapeHTML(h.patientName)}</div>
+            ${h.patientPhone ? `<div style="font-size: 0.76rem; color: #0369a1; font-weight: 600;">📱 Tel: ${this.escapeHTML(h.patientPhone)}</div>` : ''}
             <div style="font-size: 0.74rem; color: #475569;">Sol: ${this.escapeHTML(p.senderName || 'Familiar')}</div>
           </td>
           <td>
@@ -1007,6 +1268,7 @@ class AdminApp {
           </td>
           <td style="padding: 7px 6px;">
             <div style="font-weight: bold; font-size: 13px; color: #000;">${this.escapeHTML(h.patientName)}</div>
+            ${h.patientPhone ? `<div style="font-size: 10.5px; color: #0284c7; font-weight: 600;">📱 Tel: ${this.escapeHTML(h.patientPhone)}</div>` : ''}
             <div style="font-size: 10.5px; color: #475569;">Sol: ${this.escapeHTML(p.senderName || 'Familiar')}</div>
           </td>
           <td style="padding: 7px 6px;">

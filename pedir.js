@@ -34,6 +34,7 @@ const hospitalVisitCard = document.getElementById('hospital-visit-card');
 const hospitalVisitFormDetails = document.getElementById('hospital-visit-form-details');
 const hospConfirmDesejo = document.getElementById('hosp-confirm-desejo');
 const hospPatientName = document.getElementById('hosp-patient-name');
+const hospPatientPhone = document.getElementById('hosp-patient-phone');
 const hospSelectHospital = document.getElementById('hosp-select-hospital');
 const hospCustomHospital = document.getElementById('hosp-custom-hospital');
 const hospRoomNumber = document.getElementById('hosp-room-number');
@@ -49,6 +50,21 @@ const btnNewSubmission = document.getElementById('btn-new-submission');
 // Máscara amigável de telefone (42) 99999-9999
 if (senderPhoneInput) {
   senderPhoneInput.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.substring(0, 11);
+    if (v.length > 6) {
+      e.target.value = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
+    } else if (v.length > 2) {
+      e.target.value = `(${v.substring(0, 2)}) ${v.substring(2)}`;
+    } else if (v.length > 0) {
+      e.target.value = `(${v}`;
+    }
+  });
+}
+
+// Máscara de telefone do paciente hospitalar
+if (hospPatientPhone) {
+  hospPatientPhone.addEventListener('input', (e) => {
     let v = e.target.value.replace(/\D/g, '');
     if (v.length > 11) v = v.substring(0, 11);
     if (v.length > 6) {
@@ -177,6 +193,7 @@ form.addEventListener('submit', (e) => {
 
   if (wantsHospitalVisit) {
     const pName = hospPatientName ? hospPatientName.value.trim() : '';
+    const pPhone = hospPatientPhone ? hospPatientPhone.value.trim() : '';
     let hName = hospSelectHospital ? hospSelectHospital.value : '';
     if (hName.includes('Outro') && hospCustomHospital) {
       hName = hospCustomHospital.value.trim() || 'Outro Hospital / Clínica';
@@ -204,6 +221,7 @@ form.addEventListener('submit', (e) => {
     hospitalVisitData = {
       requested: true,
       patientName: pName,
+      patientPhone: pPhone,
       hospitalName: hName,
       roomNumber: rNum,
       contactPhone: cPhone,
@@ -227,13 +245,14 @@ form.addEventListener('submit', (e) => {
     // Quando solicita visita hospitalar, os dados do paciente suprem os campos superiores
     const rawSender = senderInput ? senderInput.value.trim() : '';
     senderName = rawSender || (hospitalVisitData.contactPhone ? `Familiar / Acompanhante (${hospitalVisitData.contactPhone})` : 'Familiar / Acompanhante');
-    if (!phone && hospitalVisitData.contactPhone) {
-      phone = hospitalVisitData.contactPhone;
+    if (!phone) {
+      phone = hospitalVisitData.contactPhone || hospitalVisitData.patientPhone || '';
     }
     targetPerson = `${hospitalVisitData.patientName} (Internado no ${hospitalVisitData.hospitalName})`;
-    const contactText = hospitalVisitData.contactPhone ? ` Contato do acompanhante: ${hospitalVisitData.contactPhone}.` : '';
+    const patientPhoneText = hospitalVisitData.patientPhone ? ` Tel Paciente: ${hospitalVisitData.patientPhone}.` : '';
+    const contactText = hospitalVisitData.contactPhone ? ` Contato acompanhante: ${hospitalVisitData.contactPhone}.` : '';
     const extraNotes = hospitalVisitData.notes ? ` Observação: ${hospitalVisitData.notes}.` : '';
-    purpose = `Solicitação de visita pastoral no leito para o(a) paciente ${hospitalVisitData.patientName}, internado(a) no ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber}).${contactText}${extraNotes}`;
+    purpose = `Solicitação de visita pastoral no leito para o(a) paciente ${hospitalVisitData.patientName}, internado(a) no ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber}).${patientPhoneText}${contactText}${extraNotes}`;
   } else {
     // CAMPO 1 OBRIGATÓRIO: Seu Nome
     const rawSender = senderInput ? senderInput.value.trim() : '';
@@ -316,9 +335,13 @@ form.addEventListener('submit', (e) => {
 
   // Exibir resumo da visita hospitalar na confirmação se solicitada
   if (wantsHospitalVisit && hospitalVisitData && confHospBox && confHospSummary) {
-    let summaryText = `Paciente: ${hospitalVisitData.patientName} • ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber})`;
+    let summaryText = `Paciente: ${hospitalVisitData.patientName}`;
+    if (hospitalVisitData.patientPhone) {
+      summaryText += ` (Tel: ${hospitalVisitData.patientPhone})`;
+    }
+    summaryText += ` • ${hospitalVisitData.hospitalName} (${hospitalVisitData.roomNumber})`;
     if (hospitalVisitData.contactPhone) {
-      summaryText += ` • Contato: ${hospitalVisitData.contactPhone}`;
+      summaryText += ` • Acompanhante: ${hospitalVisitData.contactPhone}`;
     }
     if (hospitalVisitData.notes) {
       summaryText += ` • Observação: ${hospitalVisitData.notes}`;
